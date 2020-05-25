@@ -17,8 +17,8 @@ const AppStyles = {
     COLOR_GREY_TRANSP: 'rgba(67, 85, 85, 0.7)',
   },
   fonts: {
-    // FONT_REGULAR: 'Roboto-Regular',
-    // FONT_MEDIUM: 'Roboto-Medium'
+    FONT_REGULAR: 'Roboto-Regular',
+    FONT_MEDIUM: 'Roboto-Medium',
   },
 };
 export default AppStyles;
