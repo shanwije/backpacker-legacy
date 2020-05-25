@@ -14,11 +14,11 @@ const { persistor, store } = configureStore();
 
 const theme = {
   ...DefaultTheme,
-  roundness: 2,
+  roundness: 5,
   colors: {
     ...DefaultTheme.colors,
-    // primary: '#3498db',
-    // accent: '#f1c40f',
+    primary: '#3498db',
+    accent: '#f1c40f',
   },
 };
 

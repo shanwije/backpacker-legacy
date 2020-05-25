@@ -18,7 +18,7 @@ export default function* loginAsync() {
   //how to call api
   //const response = yield call(loginUser, action.username, action.password);
   //mock response
-  const response = { success: true, data: { id: 1 } };
+  const response = { success: true, data: { id: 1 }, message : 'got fucked up' };
 
   if (response.success) {
     yield put(loginActions.onLoginResponse(response.data));
@@ -30,7 +30,7 @@ export default function* loginAsync() {
     yield put(loginActions.loginFailed());
     yield put(loginActions.disableLoader({}));
     setTimeout(() => {
-      Alert.alert('BoilerPlate', response.Message);
+      Alert.alert('BoilerPlate', response.message);
     }, 200);
   }
 }
