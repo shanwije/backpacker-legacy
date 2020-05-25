@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <Button icon="logout" mode="outlined" onPress={onLogout}>
+      <Button icon="logout" mode="contained" onPress={onLogout}>
         Logout
       </Button>
     </View>
