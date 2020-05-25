@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "RNBoilerPlate.app"
-               BlueprintName = "RNBoilerPlate"
-               ReferencedContainer = "container:RNBoilerPlate.xcodeproj">
+               BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
+               BuildableName = "backpacker-tvOS.app"
+               BlueprintName = "backpacker-tvOS"
+               ReferencedContainer = "container:backpacker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "RNBoilerPlateTests.xctest"
-               BlueprintName = "RNBoilerPlateTests"
-               ReferencedContainer = "container:RNBoilerPlate.xcodeproj">
+               BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
+               BuildableName = "backpacker-tvOSTests.xctest"
+               BlueprintName = "backpacker-tvOSTests"
+               ReferencedContainer = "container:backpacker.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -54,10 +54,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "RNBoilerPlate.app"
-            BlueprintName = "RNBoilerPlate"
-            ReferencedContainer = "container:RNBoilerPlate.xcodeproj">
+            BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
+            BuildableName = "backpacker-tvOS.app"
+            BlueprintName = "backpacker-tvOS"
+            ReferencedContainer = "container:backpacker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -71,10 +71,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "RNBoilerPlate.app"
-            BlueprintName = "RNBoilerPlate"
-            ReferencedContainer = "container:RNBoilerPlate.xcodeproj">
+            BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
+            BuildableName = "backpacker-tvOS.app"
+            BlueprintName = "backpacker-tvOS"
+            ReferencedContainer = "container:backpacker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
