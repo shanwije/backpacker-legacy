@@ -1,24 +1,21 @@
-/* Redux saga class
- * logins the user into the app
- * requires username and password.
- * un - username
- * pwd - password
- */
 import { put, call, select } from 'redux-saga/effects';
-import { delay } from 'redux-saga';
+import { delay } from 'redux-saga/effects';
 
 import { Alert } from 'react-native';
-// import loginUser from 'app/api/methods/loginUser';
-import * as loginActions from '../actions/loginActions';
+import loginUser from 'app/api/methods/loginUser';
+import * as loginActions from '../dataStore/actions/loginActions';
 
 // Our worker Saga that logins the user
-export default function* loginAsync() {
+export default function* loginAsync(action) {
   yield put(loginActions.enableLoader());
 
+  console.log(action);
+
   //how to call api
-  //const response = yield call(loginUser, action.username, action.password);
+  let response = yield call(loginUser, action.username, action.password);
+  yield delay(1000);
   //mock response
-  const response = { success: true, data: { id: 1 }, message: 'got fucked up' };
+  response = { success: true, data: { id: 1 }, message: 'got fucked up' };
 
   if (response.success) {
     yield put(loginActions.onLoginResponse(response.data));

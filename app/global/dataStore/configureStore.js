@@ -3,9 +3,8 @@ import { persistStore, persistCombineReducers } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 import { createLogger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
-
 import rootReducers from './reducers'; // where reducers is a object of reducers
-import sagas from './sagas';
+import rootSaga from './sagas';
 
 const config = {
   key: 'root',
@@ -14,14 +13,12 @@ const config = {
   debug: true, //to get useful logging
 };
 
-const middleware = [];
+const logLevel = __DEV__ ? 'log' : 'warn';
+const logger = createLogger({ level: logLevel });
+
 const sagaMiddleware = createSagaMiddleware();
 
-middleware.push(sagaMiddleware);
-
-if (__DEV__) {
-  middleware.push(createLogger());
-}
+const middleware = [sagaMiddleware, logger];
 
 const reducers = persistCombineReducers(config, rootReducers);
 const enhancers = [applyMiddleware(...middleware)];
@@ -35,6 +32,6 @@ const configureStore = () => {
   return { persistor, store };
 };
 
-sagaMiddleware.run(sagas);
+sagaMiddleware.run(rootSaga);
 
 export default configureStore;
