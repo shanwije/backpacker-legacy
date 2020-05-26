@@ -2,8 +2,8 @@
  * Loading reducer made seperate for easy blacklisting
  * Avoid data persist
  */
-import createReducer from 'app/lib/createReducer';
-import * as types from 'app/actions/types';
+import createReducer from './createReducer';
+import * as types from '../actions/types';
 
 const initialState = {
   isLoginLoading: false,

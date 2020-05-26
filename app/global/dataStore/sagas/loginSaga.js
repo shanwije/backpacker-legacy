@@ -9,7 +9,7 @@ import { delay } from 'redux-saga';
 
 import { Alert } from 'react-native';
 // import loginUser from 'app/api/methods/loginUser';
-import * as loginActions from 'app/actions/loginActions';
+import * as loginActions from '../actions/loginActions';
 
 // Our worker Saga that logins the user
 export default function* loginAsync() {
@@ -18,7 +18,7 @@ export default function* loginAsync() {
   //how to call api
   //const response = yield call(loginUser, action.username, action.password);
   //mock response
-  const response = { success: true, data: { id: 1 }, message : 'got fucked up' };
+  const response = { success: true, data: { id: 1 }, message: 'got fucked up' };
 
   if (response.success) {
     yield put(loginActions.onLoginResponse(response.data));

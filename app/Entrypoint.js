@@ -9,7 +9,7 @@ import { PersistGate } from 'redux-persist/es/integration/react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import Navigator from 'app/navigation';
-import configureStore from 'app/store/configureStore';
+import configureStore from './global/dataStore/configureStore';
 const { persistor, store } = configureStore();
 
 const theme = {
