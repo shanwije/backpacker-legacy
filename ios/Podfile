@@ -42,8 +42,8 @@ def flipper_post_install(installer)
   end
 end
 
-target 'backpacker' do
-  # Pods for backpacker
+target 'Backpacker' do
+  # Pods for Backpacker
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -75,7 +75,7 @@ target 'backpacker' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  target 'backpackerTests' do
+  target 'BackpackerTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -92,10 +92,10 @@ target 'backpacker' do
   end
 end
 
-target 'backpacker-tvOS' do
-  # Pods for backpacker-tvOS
+target 'Backpacker-tvOS' do
+  # Pods for Backpacker-tvOS
 
-  target 'backpacker-tvOSTests' do
+  target 'Backpacker-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
