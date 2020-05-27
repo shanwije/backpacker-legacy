@@ -1,5 +1,5 @@
 import Api from '../index';
-import ApiConstants from '../ApiConstants';
+import ApiConstants from './../ApiConstants';
 
 export default function loginUser(username, password) {
   setTimeout(() => {

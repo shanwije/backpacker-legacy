@@ -6,14 +6,14 @@ import { useSelector } from 'react-redux';
 import { navigationRef } from './NavigationService';
 
 import Login from '../../modules/Login';
-import Home from 'app/modules/Home';
+import Home from '../../modules/Home';
 
 const Stack = createStackNavigator();
 
 const homeOptions = {
   title: 'My home',
   headerStyle: {
-    backgroundColor: '#f4511e',
+    backgroundColor: '#000',
   },
   headerTintColor: '#fff',
   headerTitleStyle: {
@@ -37,6 +37,7 @@ function App() {
               // When logging out, a pop animation feels intuitive
               // You can remove this if you want the default 'push' animation
               animationTypeForReplace: isLoggedIn ? 'push' : 'pop',
+              headerShown: false,
             }}
           />
         )}
