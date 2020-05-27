@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Button } from 'react-native-paper';
 
 import { useDispatch } from 'react-redux';
-import * as loginActions from './../Login/loginActions';
+import * as loginActions from '../Login/Actions';
 import styles from './styles';
 
 export default function Home() {

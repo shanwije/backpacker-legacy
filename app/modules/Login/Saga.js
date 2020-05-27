@@ -2,8 +2,8 @@ import { put, call, select } from 'redux-saga/effects';
 import { delay } from 'redux-saga/effects';
 
 import { Alert } from 'react-native';
-import loginUser from '../../global/apiConfig/methods/loginUser';
-import * as loginActions from './loginActions';
+import loginUser from './Repository';
+import * as loginActions from './Actions';
 
 // Our worker Saga that logins the user
 export default function* loginAsync(action) {
