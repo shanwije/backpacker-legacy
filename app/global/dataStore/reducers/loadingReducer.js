@@ -3,7 +3,7 @@
  * Avoid data persist
  */
 import createReducer from './createReducer';
-import * as types from '../actions/types';
+import * as types from '../../../modules/Login/types';
 
 const initialState = {
   isLoginLoading: false,
