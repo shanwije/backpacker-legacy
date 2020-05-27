@@ -9,7 +9,8 @@
     "test": "jest",
     "lint": "eslint .",
     "update:pods": "cd ios && pod install --repo-update && cd ..",
-    "postinstall": "yarn run update:pods"
+    "postinstall": "yarn run update:pods",
+    "clean" : "cd android && ./gradlew clean && cd ../ && yarn react-native run-android"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.10.0",

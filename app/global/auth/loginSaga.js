@@ -2,7 +2,7 @@ import { put, call, select } from 'redux-saga/effects';
 import { delay } from 'redux-saga/effects';
 
 import { Alert } from 'react-native';
-import loginUser from 'app/api/methods/loginUser';
+import loginUser from '../apiConfig/methods/loginUser';
 import * as loginActions from '../dataStore/actions/loginActions';
 
 // Our worker Saga that logins the user

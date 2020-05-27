@@ -15,6 +15,6 @@ export default function loginUser(username, password) {
       message: 'got fucked up',
     });
     return dummyResponse;
-    
+
   }, 3000);
 }
