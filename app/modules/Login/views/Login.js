@@ -2,8 +2,11 @@ import React from 'react';
 import { View } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 
+
+import PropTypes from 'prop-types';
+
 import { useDispatch, useSelector } from 'react-redux';
-import * as loginActions from './../Actions';
+import * as loginActions from '../Actions';
 import styles from './styles';
 
 export default function Login() {
@@ -14,9 +17,15 @@ export default function Login() {
   return (
     <View style={styles.container}>
       <Text style={styles.login}>Login Status : {id}</Text>
-      <Button icon="login" mode="outlined" onPress={onLogin}>
+      <Button icon="login" mode="outlined" onPress={() => onLogin()}>
         Login
       </Button>
     </View>
   );
+}
+
+Login.propTypes = {
+  id : PropTypes.any,
+  onLogin: PropTypes.func,
+
 }
