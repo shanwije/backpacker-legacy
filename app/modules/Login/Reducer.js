@@ -11,7 +11,7 @@ const initialState = {
   password: '',
 };
 
-export const loginReducer = createReducer(initialState, {
+const loginReducer = createReducer(initialState, {
   [types.LOGIN_REQUEST](state, action) {
     return {
       ...state,
@@ -42,3 +42,5 @@ export const loginReducer = createReducer(initialState, {
     };
   },
 });
+
+export default loginReducer;

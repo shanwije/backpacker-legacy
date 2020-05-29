@@ -8,6 +8,8 @@ import { navigationRef } from './NavigationService';
 import Login from '../../modules/Login/views/Login';
 import Home from './../../modules/Home';
 
+import { LOGIN_REDUCER } from './../dataStore/reducers/reducerTypes';
+
 const Stack = createStackNavigator();
 
 const homeOptions = {
@@ -22,7 +24,7 @@ const homeOptions = {
 };
 
 function App() {
-  const isLoggedIn = useSelector(state => state.loginReducer.isLoggedIn);
+  const isLoggedIn = useSelector(state => state[LOGIN_REDUCER].isLoggedIn);
 
   return (
     <NavigationContainer ref={navigationRef}>
