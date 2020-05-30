@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux';
 
 import { navigationRef } from './NavigationService';
 
-import Login from '../../modules/Login/src/views/Login';
-import Home from './../../modules/Home';
+import Login from './../../modules/Login/src/views';
+import Home from './../../modules/Home/src/views';
 import { LOGIN_REDUCER } from './../dataStore/reducers/reducerTypes';
 
 const Stack = createStackNavigator();
