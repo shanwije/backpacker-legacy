@@ -1,4 +1,2 @@
-export default {
-  LOGIN_REDUCER: 'login',
-  LOADING_REDUCER: 'loading',
-};
+export const LOGIN_REDUCER = 'auth';
+export const LOADING_REDUCER = 'loading';

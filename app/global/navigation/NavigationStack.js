@@ -7,7 +7,6 @@ import { navigationRef } from './NavigationService';
 
 import Login from '../../modules/Login/views/Login';
 import Home from './../../modules/Home';
-
 import { LOGIN_REDUCER } from './../dataStore/reducers/reducerTypes';
 
 const Stack = createStackNavigator();
