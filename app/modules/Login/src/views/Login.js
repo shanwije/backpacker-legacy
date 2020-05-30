@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import * as loginActions from '../Actions';
 import styles from './styles';
-import { LOGIN_REDUCER } from './../../../global/dataStore/reducers/reducerTypes';
+import { LOGIN_REDUCER } from '../../../../global/dataStore/reducers/reducerTypes';
 
 export default function Login() {
   const id = useSelector(state => state[LOGIN_REDUCER].id);

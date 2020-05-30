@@ -1,5 +1,5 @@
-import Api from '../../global/apiConfig/index';
-import ApiConstants from '../../global/apiConfig/ApiConstants';
+import Api from '../../../global/apiConfig/index';
+import ApiConstants from '../../../global/apiConfig/ApiConstants';
 
 export default function loginUser(username, password) {
   setTimeout(() => {
@@ -15,6 +15,5 @@ export default function loginUser(username, password) {
       message: 'got fucked up',
     });
     return dummyResponse;
-
   }, 3000);
 }

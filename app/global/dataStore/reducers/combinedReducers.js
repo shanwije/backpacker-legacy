@@ -1,4 +1,4 @@
-import loginReducer from './../../../modules/Login/Reducer';
+import loginReducer from '../../../modules/Login/src/Reducer';
 import loadingReducer from './loadingReducer';
 
 import { LOGIN_REDUCER, LOADING_REDUCER } from './reducerTypes';

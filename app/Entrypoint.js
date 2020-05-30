@@ -1,7 +1,3 @@
-/**
- * React Native App
- * Everthing starts from the entrypoint
- */
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
 import { Provider } from 'react-redux';
@@ -22,7 +18,7 @@ const theme = {
   },
 };
 
-export default function Entrypoint() {
+export default function EntryPoint() {
   return (
     <Provider store={store}>
       <PersistGate loading={<ActivityIndicator />} persistor={persistor}>

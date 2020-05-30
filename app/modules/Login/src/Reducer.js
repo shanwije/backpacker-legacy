@@ -1,7 +1,7 @@
 /* Login Reducer
  * handles login states in the app
  */
-import createReducer from '../../global/dataStore/reducers/createReducer';
+import createReducer from '../../../global/dataStore/reducers/createReducer';
 import {
   LOGIN_REQUEST,
   LOGIN_FAILED,

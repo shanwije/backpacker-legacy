@@ -1,6 +1,6 @@
 import { takeEvery, all } from 'redux-saga/effects';
-import { LOGIN_REQUEST } from '../../../modules/Login/types';
-import loginSaga from '../../../modules/Login/Saga';
+import { LOGIN_REQUEST } from '../../../modules/Login/src/types';
+import loginSaga from '../../../modules/Login/src/Saga';
 
 export default function* watch() {
   yield takeEvery('*', action => console.log('SAGA', action));
