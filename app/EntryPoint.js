@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/es/integration/react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
@@ -13,8 +13,8 @@ const theme = {
   roundness: 5,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#3498db',
-    accent: '#f1c40f',
+    primary: '#000',
+    accent: '#fff',
   },
 };
 
@@ -23,6 +23,7 @@ export default function EntryPoint() {
     <Provider store={store}>
       <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
         <PaperProvider theme={theme}>
+          <StatusBar hidden />
           <Navigator />
         </PaperProvider>
       </PersistGate>

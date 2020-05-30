@@ -8,3 +8,5 @@ android
 
 AuthNavigator -> HomeMainTabNavigation, Login,
 HomeMainTabNavigation -> Home, Profile, Add, Map
+
+backgroundImage: https://pxhere.com/en/photo/1503853
