@@ -1,2 +1,2 @@
-import NavigationStack from './NavigationStack';
-export default NavigationStack;
+import AuthNavigationStack from './AuthNavigationStack';
+export default AuthNavigationStack;

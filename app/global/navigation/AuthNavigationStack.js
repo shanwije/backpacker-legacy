@@ -5,22 +5,12 @@ import { useSelector } from 'react-redux';
 
 import { navigationRef } from './NavigationService';
 
-import Login from './../../modules/Login/src/views';
-import Home from './../../modules/Home/src/views';
-import { LOGIN_REDUCER } from './../dataStore/reducers/reducerTypes';
+import Login from '../../modules/Login/src/views';
+
+import HomeMainBottomTabNavigator from './HomeMainBottomTabNavigator';
+import { LOGIN_REDUCER } from '../dataStore/reducers/reducerTypes';
 
 const Stack = createStackNavigator();
-
-const homeOptions = {
-  title: 'My home',
-  headerStyle: {
-    backgroundColor: '#000',
-  },
-  headerTintColor: '#fff',
-  headerTitleStyle: {
-    fontWeight: 'bold',
-  },
-};
 
 function App() {
   const isLoggedIn = useSelector(state => state[LOGIN_REDUCER].isLoggedIn);
@@ -29,7 +19,11 @@ function App() {
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
         {isLoggedIn ? (
-          <Stack.Screen name="Home" component={Home} options={homeOptions} />
+          <Stack.Screen
+            name="HomeMainBottomTabNavigator"
+            component={HomeMainBottomTabNavigator}
+            options={{ headerShown: false }}
+          />
         ) : (
           <Stack.Screen
             name="Login"
