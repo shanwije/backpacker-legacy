@@ -12,8 +12,11 @@ export default function MainView() {
 
   return (
     <View style={styles.container}>
-      <Button icon="logout" mode="contained" onPress={onLogout}>
-        Logout
+      <Button
+        icon="logout"
+        mode="contained"
+        onPress={() => console.log('profile button pressed')}>
+        Profile
       </Button>
     </View>
   );
