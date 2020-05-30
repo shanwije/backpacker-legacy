@@ -2,7 +2,14 @@
  * handles login states in the app
  */
 import createReducer from '../../global/dataStore/reducers/createReducer';
-import * as types from './types';
+import {
+  LOGIN_REQUEST,
+  LOGIN_FAILED,
+  LOGIN_RESPONSE,
+  LOGIN_LOADING_ENDED,
+  LOG_OUT,
+} from './types';
+import _ from 'lodash';
 
 const initialState = {
   isLoggedIn: false,
@@ -12,30 +19,30 @@ const initialState = {
 };
 
 const loginReducer = createReducer(initialState, {
-  [types.LOGIN_REQUEST](state, action) {
+  [LOGIN_REQUEST](state, action) {
     return {
       ...state,
-      username: action.username,
-      password: action.password,
+      username: _.get(action, 'payload.username', ''),
+      password: _.get(action, 'payload.password', ''),
     };
   },
-  [types.LOGIN_LOADING_ENDED](state) {
+  [LOGIN_LOADING_ENDED](state) {
     return { ...state };
   },
-  [types.LOGIN_RESPONSE](state, action) {
+  [LOGIN_RESPONSE](state, action) {
     return {
       ...state,
-      id: action.response.id,
+      id: _.get(action, 'payload.id', ''),
       isLoggedIn: true,
     };
   },
-  [types.LOGIN_FAILED](state) {
+  [LOGIN_FAILED](state) {
     return {
       ...state,
       isLoggedIn: false,
     };
   },
-  [types.LOG_OUT](state) {
+  [LOG_OUT](state) {
     return {
       ...state,
       isLoggedIn: false,

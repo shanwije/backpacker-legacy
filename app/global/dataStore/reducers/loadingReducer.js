@@ -3,17 +3,20 @@
  * Avoid data persist
  */
 import createReducer from './createReducer';
-import * as types from '../../../modules/Login/types';
+import {
+  LOGIN_ENABLE_LOADER,
+  LOGIN_DISABLE_LOADER,
+} from '../../../modules/Login/types';
 
 const initialState = {
   isLoginLoading: false,
 };
 
 const loadingReducer = createReducer(initialState, {
-  [types.LOGIN_ENABLE_LOADER](state) {
+  [LOGIN_ENABLE_LOADER](state) {
     return { ...state, isLoginLoading: true };
   },
-  [types.LOGIN_DISABLE_LOADER](state) {
+  [LOGIN_DISABLE_LOADER](state) {
     return { ...state, isLoginLoading: false };
   },
 });

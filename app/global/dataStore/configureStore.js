@@ -13,12 +13,12 @@ const config = {
   debug: true, //to get useful logging
 };
 
-const logLevel = __DEV__ ? 'log' : 'warn';
-const logger = createLogger({ level: logLevel });
-
 const sagaMiddleware = createSagaMiddleware();
-
-const middleware = [sagaMiddleware, logger];
+const middleware = [sagaMiddleware];
+if (process.env.NODE_ENV === `development`) {
+  const logger = createLogger();
+  middleware.push(logger);
+}
 
 const reducers = persistCombineReducers(config, combinedReducers);
 const enhancers = [applyMiddleware(...middleware)];
@@ -26,7 +26,7 @@ const enhancers = [applyMiddleware(...middleware)];
 const persistConfig = { enhancers };
 const store = createStore(reducers, undefined, compose(...enhancers));
 const persistor = persistStore(store, persistConfig, () => {
-  //   console.log('Test', store.getState());
+  //   log for the current status
 });
 const configureStore = () => {
   return { persistor, store };

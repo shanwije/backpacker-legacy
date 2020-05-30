@@ -1,43 +1,34 @@
 /*
  * Reducer actions related with login
  */
-import * as types from './types';
+import {
+  LOGIN_REQUEST,
+  LOGIN_FAILED,
+  LOGIN_RESPONSE,
+  LOGIN_ENABLE_LOADER,
+  LOGIN_DISABLE_LOADER,
+  LOG_OUT,
+} from './types';
+import createAction from '../../global/dataStore/actions/createAction';
 
-export function requestLogin(username, password) {
-  return {
-    type: types.LOGIN_REQUEST,
-    username,
-    password,
-  };
-}
+export const requestLogin = (username, password) =>
+  createAction({
+    type: LOGIN_REQUEST,
+    payload: { username, password },
+  });
 
-export function loginFailed() {
-  return {
-    type: types.LOGIN_FAILED,
-  };
-}
+export const loginFailed = () =>
+  createAction({
+    type: LOGIN_FAILED,
+  });
 
-export function onLoginResponse(response) {
-  return {
-    type: types.LOGIN_RESPONSE,
-    response,
-  };
-}
+export const onLoginResponse = response =>
+  createAction({
+    type: LOGIN_RESPONSE,
+    payload: response,
+  });
+export const enableLoader = () => createAction({ type: LOGIN_ENABLE_LOADER });
 
-export function enableLoader() {
-  return {
-    type: types.LOGIN_ENABLE_LOADER,
-  };
-}
+export const disableLoader = () => createAction({ type: LOGIN_DISABLE_LOADER });
 
-export function disableLoader() {
-  return {
-    type: types.LOGIN_DISABLE_LOADER,
-  };
-}
-
-export function logOut() {
-  return {
-    type: types.LOG_OUT,
-  };
-}
+export const logOut = () => createAction({ type: LOG_OUT });
