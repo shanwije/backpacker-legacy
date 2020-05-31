@@ -4,8 +4,6 @@ import { View } from 'react-native';
 import { TextInput, IconButton, HelperText } from 'react-native-paper';
 
 const TextBox = props => {
-  console.log('XXXX', props);
-
   const draggingDistance = typeof props.icon === 'object' ? 20 : 0;
 
   const wrapper = (

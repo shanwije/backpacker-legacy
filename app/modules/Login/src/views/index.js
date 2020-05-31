@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useState } from 'react';
 import { View, ImageBackground } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,13 +9,41 @@ import FormWrapper from '../../../../global/components/FormWrapper';
 
 import styles from './styles';
 import { LOGIN_REDUCER } from '../../../../global/dataStore/reducers/reducerTypes';
-import backgroundImage from './../../../../assets/images/login_background.png';
+import backgroundImage from './../../../../assets/images/login_background.jpg';
 import AppTitle from '../../../../global/components/AppTitle';
+import {
+  validateEmail,
+  validatePassword,
+} from './../../../../global/utils/textValidators';
+import _ from 'lodash';
 
 export default function MainView() {
   const id = useSelector(state => state[LOGIN_REDUCER].id);
   const dispatch = useDispatch();
-  const onLogin = () => dispatch(loginActions.requestLogin('test', '1234'));
+
+  const [email, setEmail] = useState({
+    value: '',
+    error: false,
+  });
+  const [password, setPassword] = useState({
+    value: '',
+    error: true,
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const onLogin = () =>
+    dispatch(loginActions.requestLogin(email.value, password.value));
+
+  const validateInput = (type, input) => {
+    if (type === 'EMAIL') {
+      const error = !validateEmail(input);
+      setEmail({ value: input, error: error });
+    } else {
+      const error = !validatePassword(input);
+      setPassword({ value: input, error: error });
+    }
+  };
 
   return (
     <ImageBackground
@@ -27,11 +55,16 @@ export default function MainView() {
         <View style={styles.topInnerContainer}>
           <FormWrapper formHeader="Welcome Back!">
             <TextBox
-              focus={true}
               label="Email"
-              error={true}
+              error={email.error}
               errorText={'invalid email'}
-              secureTextEntry={false}
+              value={email.value}
+              onBlur={() => {
+                // validateInput('EMAIL');
+              }}
+              onChangeText={text => {
+                validateInput('EMAIL', text);
+              }}
             />
             <TextBox
               focus={true}
@@ -39,16 +72,28 @@ export default function MainView() {
               error={false}
               errorText={'hello world'}
               icon={{
-                icon: 'eye',
+                icon: showPassword ? 'eye' : 'eye-off',
                 disabled: false,
                 animated: true,
                 accessibilityLabel: 'textBox icon',
-                onPress: val => console.log('pressed', val),
+                onPress: val => setShowPassword(!showPassword),
               }}
-              secureTextEntry={true}
+              secureTextEntry={!showPassword}
+              value={password.value}
+              onBlur={() => {
+                // validateInput('PASSWORD');
+              }}
+              onChangeText={text => {
+                validateInput('PASSWORD', text);
+              }}
             />
-
-            <Button icon="login" mode="contained" onPress={() => onLogin()}>
+            <Button
+              icon="login"
+              mode="contained"
+              disabled={
+                password.error || (email.error || email.value.length === 0)
+              }
+              onPress={() => onLogin()}>
               Sign In
             </Button>
             <View style={styles.forgotPasswordView}>
