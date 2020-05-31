@@ -1,12 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { View, ImageBackground, Icon } from 'react-native';
-import { Text, Button, TextInput, IconButton } from 'react-native-paper';
+import { View, ImageBackground } from 'react-native';
+import { Text, Button } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import * as loginActions from '../Actions';
+import TextBox from '../../../../global/components/TextBox';
+import FormWrapper from '../../../../global/components/FormWrapper';
+
 import styles from './styles';
 import { LOGIN_REDUCER } from '../../../../global/dataStore/reducers/reducerTypes';
-import backgroundImage from './../../../../assets/images/login_background.jpeg';
+import backgroundImage from './../../../../assets/images/login_background.png';
+import AppTitle from '../../../../global/components/AppTitle';
+
 export default function MainView() {
   const id = useSelector(state => state[LOGIN_REDUCER].id);
   const dispatch = useDispatch();
@@ -18,53 +23,48 @@ export default function MainView() {
       width={null}
       style={styles.backgroundImage}>
       <View style={styles.container}>
+        <AppTitle />
         <View style={styles.topInnerContainer}>
-          <View style={styles.wrapper}>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <TextInput
-                focus={true}
-                label="Email"
-                error={false}
-                mode="flat"
-                // secureTextEntry={true}
-                style={styles.formElement}
-                // caretHidden={true}
-              />
-              <IconButton style={{ right: 30 }} icon="email" size={20} />
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <TextInput
-                focus={true}
-                label="password"
-                error={false}
-                mode="flat"
-                secureTextEntry={true}
-                style={styles.formElement}
-                // caretHidden={true}
-              />
-              <IconButton style={{ right: 30 }} icon="eye" size={20} />
-            </View>
+          <FormWrapper formHeader="Welcome Back!">
+            <TextBox
+              focus={true}
+              label="Email"
+              error={true}
+              errorText={'invalid email'}
+              secureTextEntry={false}
+            />
+            <TextBox
+              focus={true}
+              label="Password"
+              error={false}
+              errorText={'hello world'}
+              icon={{
+                icon: 'eye',
+                disabled: false,
+                animated: true,
+                accessibilityLabel: 'textBox icon',
+                onPress: val => console.log('pressed', val),
+              }}
+              secureTextEntry={true}
+            />
 
-            <Button
-              style={styles.formButton}
-              icon="login"
-              mode="contained"
-              onPress={() => onLogin()}>
+            <Button icon="login" mode="contained" onPress={() => onLogin()}>
               Sign In
             </Button>
-            <Text style={styles.login}>Login Status : {id}</Text>
-          </View>
+            <View style={styles.forgotPasswordView}>
+              <Button mode="text" compact={true} onPress={() => onLogin()}>
+                Forgot your password?
+              </Button>
+            </View>
+            <View style={styles.signUpView}>
+              <Text>Don't have an account? </Text>
+              <Button mode="text" compact={true} onPress={() => onLogin()}>
+                Sign Up
+              </Button>
+            </View>
+          </FormWrapper>
         </View>
+        <Text style={styles.login}>Login Status : {id}</Text>
       </View>
     </ImageBackground>
   );
