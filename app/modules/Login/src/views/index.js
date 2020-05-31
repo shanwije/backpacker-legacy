@@ -15,7 +15,6 @@ import {
   validateEmail,
   validatePassword,
 } from './../../../../global/utils/textValidators';
-import _ from 'lodash';
 
 export default function MainView() {
   const id = useSelector(state => state[LOGIN_REDUCER].id);

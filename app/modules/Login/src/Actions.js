@@ -5,16 +5,18 @@ import {
   LOGIN_REQUEST,
   LOGIN_FAILED,
   LOGIN_RESPONSE,
+  LOG_OUT,
+} from './const/types';
+import {
   LOGIN_ENABLE_LOADER,
   LOGIN_DISABLE_LOADER,
-  LOG_OUT,
-} from './types';
+} from './../../../global/dataStore/const/commonActionTypes';
 import createAction from './../../../global/dataStore/actions/createAction';
 
-export const requestLogin = (username, password) =>
+export const requestLogin = (email, password) =>
   createAction({
     type: LOGIN_REQUEST,
-    payload: { username, password },
+    payload: { email, password },
   });
 
 export const loginFailed = () =>
