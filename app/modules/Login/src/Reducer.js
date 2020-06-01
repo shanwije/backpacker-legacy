@@ -8,7 +8,7 @@ import {
   LOGIN_RESPONSE,
   LOGIN_LOADING_ENDED,
   LOG_OUT,
-} from './types';
+} from './const/types';
 import _ from 'lodash';
 
 const initialState = {
@@ -22,7 +22,7 @@ const loginReducer = createReducer(initialState, {
   [LOGIN_REQUEST](state, action) {
     return {
       ...state,
-      username: _.get(action, 'payload.username', ''),
+      email: _.get(action, 'payload.email', ''),
       password: _.get(action, 'payload.password', ''),
     };
   },

@@ -1,38 +1,33 @@
-import { put, call, select } from 'redux-saga/effects';
-import { delay } from 'redux-saga/effects';
-
-import { Alert } from 'react-native';
-import loginUser from './Repository';
+import { put, call } from 'redux-saga/effects';
 import * as loginActions from './Actions';
+import * as errorActions from './../../../global/dataStore/actions/errorActions';
 import _ from 'lodash';
+import authenticate from './Repository';
 
-// Our worker Saga that logins the user
 export default function* loginAsync(action) {
   yield put(loginActions.enableLoader());
 
-  const { username, password } = _.get(action, 'payload');
+  const { email, password } = _.get(action, 'payload');
 
-  //how to call api
-  let response = yield call(loginUser, username, password);
-  yield delay(1000);
-  //mock response
-  response = {
-    success: true,
-    data: { id: '1233132321' },
-    message: 'got fucked up',
-  };
+  console.log(email);
 
-  if (response.success) {
-    yield put(loginActions.onLoginResponse(response.data));
-    yield put(loginActions.disableLoader({}));
-
-    // no need to call navigate as this is handled by redux store with SwitchNavigator
-    //yield call(navigationActions.navigateToHome);
-  } else {
+  try {
+    let response = yield call(() => authenticate(email, password));
+    if (response.success) {
+      yield put(loginActions.onLoginResponse(response.data));
+      yield put(loginActions.disableLoader({}));
+    } else {
+      yield put(errorActions.setError('Username or Password is incorrect'));
+      yield put(loginActions.loginFailed());
+      yield put(loginActions.disableLoader({}));
+    }
+  } catch (err) {
+    yield put(
+      errorActions.setError(
+        `Oops, Unexpected error has occurred\n${_.get(err, 'message')}`,
+      ),
+    );
     yield put(loginActions.loginFailed());
     yield put(loginActions.disableLoader({}));
-    setTimeout(() => {
-      Alert.alert('BoilerPlate', response.message);
-    }, 200);
   }
 }

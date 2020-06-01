@@ -1,19 +1,12 @@
-import Api from '../../../global/apiConfig/index';
-import ApiConstants from '../../../global/apiConfig/ApiConstants';
+import { AUTHENTICATE } from './const/url';
+import { fetch } from './../../../global/utils/restUtils';
+import { methods } from './../../../global/const/RESTConst';
+import _ from 'lodash';
 
-export default function loginUser(username, password) {
-  setTimeout(() => {
-    // return Api(
-    //   ApiConstants.LOGIN + '?username=' + username + '&password=' + password,
-    //   null,
-    //   'post',
-    //   null,
-    // );
-    const dummyResponse = Promise.resolve({
-      success: true,
-      data: { id: 1 },
-      message: 'got fucked up',
-    });
-    return dummyResponse;
-  }, 3000);
+export default function authenticate(email, password) {
+  return new Promise((resolve, reject) => {
+    fetch(AUTHENTICATE, methods.POST, { email, password })
+      .then(res => resolve(_.get(res, 'data', {})))
+      .catch(err => reject(err));
+  });
 }

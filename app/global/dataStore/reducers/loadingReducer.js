@@ -1,12 +1,8 @@
-/**
- * Loading reducer made seperate for easy blacklisting
- * Avoid data persist
- */
 import createReducer from './createReducer';
 import {
   LOGIN_ENABLE_LOADER,
   LOGIN_DISABLE_LOADER,
-} from '../../../modules/Login/src/types';
+} from './../const/commonActionTypes';
 
 const initialState = {
   isLoginLoading: false,
