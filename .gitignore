@@ -61,3 +61,4 @@ buck-out/
 #custom
 yarn.lock
 .history/
+*-debug.apk

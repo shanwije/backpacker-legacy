@@ -13,5 +13,23 @@ backgroundImage: https://pxhere.com/en/photo/1503853
 
 wireless debugging at home : http://100.106.62.233:8081/
 
-keystore password : OptImates@0106
-key alias : optimatesbackpacker01
+---
+
+keystore password : opTima106
+key alias : backpacker
+key password : optBackMa
+
+---
+
+Generating the release APK (https://reactnative.dev/docs/signed-apk-android)
+
+$ cd android
+$ ./gradlew bundleRelease
+The generated AAB can be found under android/app/build/outputs/bundle/release/app.aab
+
+---
+
+Testing the release build of your app
+
+cd backpacker/
+npx react-native run-android --variant=release
