@@ -15,6 +15,7 @@ import {
   validateEmail,
   validatePassword,
 } from './../../../../global/utils/textValidators';
+import { AccessToken, LoginManager } from 'react-native-fbsdk';
 
 export default function MainView() {
   const id = useSelector(state => state[LOGIN_REDUCER].id);
@@ -42,6 +43,54 @@ export default function MainView() {
       const error = !validatePassword(input);
       setPassword({ value: input, error: error });
     }
+  };
+
+  const initUser = token => {
+    const fields = [
+      'email',
+      'user_friends',
+      'user_hometown',
+      'user_location',
+      'user_age_range',
+      'user_photos',
+    ];
+    fetch(
+      `https://graph.facebook.com/v2.5/me?fields=birthday,email,hometown,picture,location&access_token=${token}`,
+    )
+      .then(response => response.json())
+      .then(json => {
+        console.log(json);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  const loginFacebook = () => {
+    LoginManager.logInWithPermissions([
+      'email',
+      'public_profile',
+      'user_friends',
+      'user_hometown',
+      'user_location',
+      'user_age_range',
+      'user_photos',
+    ]).then(
+      function(result) {
+        console.log('fb result', result);
+        if (result.isCancelled) {
+          alert('Login was cancelled');
+        } else {
+          AccessToken.getCurrentAccessToken().then(data => {
+            const { accessToken } = data;
+            initUser(accessToken);
+          });
+        }
+      },
+      function(error) {
+        console.log('fb error', error);
+      },
+    );
   };
 
   return (
@@ -95,6 +144,13 @@ export default function MainView() {
               onPress={() => onLogin()}>
               Sign In
             </Button>
+            <Button
+              icon="login"
+              mode="contained"
+              onPress={() => loginFacebook()}>
+              Sign In with facebook
+            </Button>
+            {/* <FbLoginButton /> */}
             <View style={styles.forgotPasswordView}>
               <Button mode="text" compact={true} onPress={() => onLogin()}>
                 Forgot your password?
