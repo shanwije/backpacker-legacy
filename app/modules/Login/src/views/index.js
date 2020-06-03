@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, ImageBackground } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,9 +17,20 @@ import inputTypes from './../../../../global/const/InputTypes';
 export default function MainView() {
   const id = useSelector(state => state[LOGIN_REDUCER].id);
   const dispatch = useDispatch();
-  const [email, disableSubmitByEmail] = useFormInput(inputTypes.EMAIL);
-  const [password, disableSubmitByPassword] = useFormInput(inputTypes.PASSWORD);
+  const [email, disableSubmitByEmail, setEmail] = useFormInput(
+    inputTypes.EMAIL,
+  );
+  const [password, disableSubmitByPassword, setPassword] = useFormInput(
+    inputTypes.PASSWORD,
+  );
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      setEmail('');
+      setPassword('');
+    };
+  });
 
   const onLogin = () =>
     dispatch(loginActions.requestLogin(email.value, password.value));

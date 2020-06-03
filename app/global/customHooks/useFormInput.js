@@ -56,5 +56,5 @@ export default function useFormInput(initialType = COMMON, initialValue = '') {
     onBlur,
   };
 
-  return [bind, disableSubmit];
+  return [bind, disableSubmit, setValue];
 }
