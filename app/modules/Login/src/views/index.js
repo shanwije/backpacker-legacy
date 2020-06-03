@@ -11,38 +11,18 @@ import styles from './styles';
 import { LOGIN_REDUCER } from '../../../../global/dataStore/reducers/reducerTypes';
 import backgroundImage from './../../../../assets/images/login_background.jpg';
 import AppTitle from '../../../../global/components/AppTitle';
-import {
-  validateEmail,
-  validatePassword,
-} from './../../../../global/utils/textValidators';
+import useFormInput from '../../../../global/customHooks/useFormInput';
+import inputTypes from './../../../../global/const/InputTypes';
 
 export default function MainView() {
   const id = useSelector(state => state[LOGIN_REDUCER].id);
   const dispatch = useDispatch();
-
-  const [email, setEmail] = useState({
-    value: '',
-    error: false,
-  });
-  const [password, setPassword] = useState({
-    value: '',
-    error: true,
-  });
-
+  const [email, disableSubmitByEmail] = useFormInput(inputTypes.EMAIL);
+  const [password, disableSubmitByPassword] = useFormInput(inputTypes.PASSWORD);
   const [showPassword, setShowPassword] = useState(false);
 
   const onLogin = () =>
     dispatch(loginActions.requestLogin(email.value, password.value));
-
-  const validateInput = (type, input) => {
-    if (type === 'EMAIL') {
-      const error = !validateEmail(input);
-      setEmail({ value: input, error: error });
-    } else {
-      const error = !validatePassword(input);
-      setPassword({ value: input, error: error });
-    }
-  };
 
   return (
     <ImageBackground
@@ -53,23 +33,11 @@ export default function MainView() {
         <AppTitle />
         <View style={styles.topInnerContainer}>
           <FormWrapper formHeader="Welcome Back!">
+            <TextBox label="Email" {...email} />
             <TextBox
-              label="Email"
-              error={email.error}
-              errorText={'invalid email'}
-              value={email.value}
-              onBlur={() => {
-                // validateInput('EMAIL');
-              }}
-              onChangeText={text => {
-                validateInput('EMAIL', text);
-              }}
-            />
-            <TextBox
-              focus={true}
               label="Password"
-              error={false}
-              errorText={'hello world'}
+              secureTextEntry={!showPassword}
+              {...password}
               icon={{
                 icon: showPassword ? 'eye' : 'eye-off',
                 disabled: false,
@@ -77,38 +45,33 @@ export default function MainView() {
                 accessibilityLabel: 'textBox icon',
                 onPress: val => setShowPassword(!showPassword),
               }}
-              secureTextEntry={!showPassword}
-              value={password.value}
-              onBlur={() => {
-                // validateInput('PASSWORD');
-              }}
-              onChangeText={text => {
-                validateInput('PASSWORD', text);
-              }}
             />
             <Button
               icon="login"
               mode="contained"
-              disabled={
-                password.error || (email.error || email.value.length === 0)
-              }
+              disabled={disableSubmitByEmail || disableSubmitByPassword}
               onPress={() => onLogin()}>
               Sign In
             </Button>
             <View style={styles.forgotPasswordView}>
-              <Button mode="text" compact={true} onPress={() => onLogin()}>
+              <Button
+                mode="text"
+                compact={true}
+                onPress={() => console.log('forgot password')}>
                 Forgot your password?
               </Button>
             </View>
             <View style={styles.signUpView}>
               <Text>Don't have an account? </Text>
-              <Button mode="text" compact={true} onPress={() => onLogin()}>
+              <Button
+                mode="text"
+                compact={true}
+                onPress={() => console.log('signup')}>
                 Sign Up
               </Button>
             </View>
           </FormWrapper>
         </View>
-        <Text style={styles.login}>Login Status : {id}</Text>
       </View>
     </ImageBackground>
   );
