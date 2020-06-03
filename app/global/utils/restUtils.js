@@ -13,7 +13,20 @@ export const fetch = (
   headers = {},
   timeout = default_timeout_duration,
 ) => {
-  console.log('url', url);
+  if (__DEV__) {
+    console.log(
+      `REST CALL : \nurl : ${url}, \nmethod : ${method}, \ndata : ${JSON.stringify(
+        data,
+        null,
+        '\t',
+      )}, \nheaders: ${JSON.stringify(
+        headers,
+        null,
+        '\t',
+      )}, \ntimeout: ${timeout}}`,
+    );
+  }
+
   return new Promise((resolve, reject) => {
     axios({
       url,
@@ -25,6 +38,9 @@ export const fetch = (
       timeout: timeout,
     })
       .then(res => {
+        if (__DEV__) {
+          console.log(`Response success : ${JSON.stringify(res, null, '\t')}`);
+        }
         if (
           res.status === statusCodes.CREATED ||
           res.status === statusCodes.OK ||
@@ -35,7 +51,12 @@ export const fetch = (
           reject(res);
         }
       })
-      .catch(err => reject(err));
+      .catch(err => {
+        if (__DEV__) {
+          console.warn(`Response error : ${JSON.stringify(err, null, '\t')}`);
+        }
+        reject(err);
+      });
   });
 };
 
