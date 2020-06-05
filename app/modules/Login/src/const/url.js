@@ -1,3 +1,3 @@
-const PREFIX = 'http://192.168.1.8:5001/api/v1';
+const PREFIX = 'http://100.102.86.31:5000/api/v1';
 
-export const AUTHENTICATE = `${PREFIX}/login`;
+export const AUTHENTICATE = `${PREFIX}/auth/sign-in`;

@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect } from 'react';
 import { View, ImageBackground } from 'react-native';
 import { Text, Button } from 'react-native-paper';
@@ -12,7 +11,7 @@ import { LOGIN_REDUCER } from '../../../../global/dataStore/reducers/reducerType
 import backgroundImage from './../../../../assets/images/login_background.jpg';
 import AppTitle from '../../../../global/components/AppTitle';
 import useFormInput from '../../../../global/customHooks/useFormInput';
-import inputTypes from './../../../../global/const/InputTypes';
+import inputTypes from '../../../../global/const/InputTypes';
 
 export default function MainView() {
   const id = useSelector(state => state[LOGIN_REDUCER].id);
@@ -24,13 +23,6 @@ export default function MainView() {
     inputTypes.PASSWORD,
   );
   const [showPassword, setShowPassword] = useState(false);
-
-  useEffect(() => {
-    return () => {
-      setEmail('');
-      setPassword('');
-    };
-  });
 
   const onLogin = () =>
     dispatch(loginActions.requestLogin(email.value, password.value));
@@ -44,10 +36,23 @@ export default function MainView() {
         <AppTitle />
         <View style={styles.topInnerContainer}>
           <FormWrapper formHeader="Welcome Back!">
-            <TextBox label="Email" {...email} />
+            <TextBox
+              label="Email"
+              autoCompleteType="email"
+              importantForAutofill="auto"
+              keyboardType="email-address"
+              textAlign="center"
+              textContentType="emailAddress"
+              {...email}
+            />
             <TextBox
               label="Password"
               secureTextEntry={!showPassword}
+              autoCompleteType="password"
+              importantForAutofill="auto"
+              keyboardType="visible-password"
+              textAlign="center"
+              textContentType="password"
               {...password}
               icon={{
                 icon: showPassword ? 'eye' : 'eye-off',
@@ -60,6 +65,8 @@ export default function MainView() {
             <Button
               icon="login"
               mode="contained"
+              type="submit"
+              value="Submit"
               disabled={disableSubmitByEmail || disableSubmitByPassword}
               onPress={() => onLogin()}>
               Sign In

@@ -53,7 +53,7 @@ export const fetch = (
       })
       .catch(err => {
         if (__DEV__) {
-          console.warn(`Response error : ${JSON.stringify(err, null, '\t')}`);
+          console.log(`Response error : ${JSON.stringify(err, null, '\t')}`);
         }
         reject(err);
       });

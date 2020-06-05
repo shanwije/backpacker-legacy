@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import { navigationRef } from './NavigationService';
 
-import Login from '../../modules/Login/src/views';
+import signIn from '../../modules/Login/src/views/signIn';
 
 import HomeMainBottomTabNavigator from './HomeMainBottomTabNavigator';
 import { LOGIN_REDUCER } from '../dataStore/reducers/reducerTypes';
@@ -26,8 +26,8 @@ function App() {
           />
         ) : (
           <Stack.Screen
-            name="Login"
-            component={Login}
+            name="signIn"
+            component={signIn}
             options={{
               // When logging out, a pop animation feels intuitive
               // You can remove this if you want the default 'push' animation

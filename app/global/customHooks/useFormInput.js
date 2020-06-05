@@ -32,7 +32,7 @@ export default function useFormInput(initialType = COMMON, initialValue = '') {
     }
   };
 
-  const onBlur = () => {
+  const onEndEditing = () => {
     if (errorText === '') {
       if (validateValue(value, type)) {
         setDisableSubmit(false);
@@ -53,7 +53,7 @@ export default function useFormInput(initialType = COMMON, initialValue = '') {
     error: showError,
     errorText,
     onChangeText,
-    onBlur,
+    onEndEditing,
   };
 
   return [bind, disableSubmit, setValue];
