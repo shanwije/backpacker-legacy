@@ -33,3 +33,8 @@ Testing the release build of your app
 
 cd backpacker/
 npx react-native run-android --variant=release
+
+------
+
+keep     "crypto-js": "3.1.9-1",
+(latest 4.0.0 has an error)
