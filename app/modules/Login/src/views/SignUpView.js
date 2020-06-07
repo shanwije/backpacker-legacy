@@ -13,7 +13,7 @@ import AppTitle from '../../../../global/components/AppTitle';
 import useFormInput from '../../../../global/customHooks/useFormInput';
 import inputTypes from '../../../../global/const/InputTypes';
 
-export default function MainView() {
+export default function SignUpView() {
   const id = useSelector(state => state[LOGIN_REDUCER].id);
   const dispatch = useDispatch();
   const [email, disableSubmitByEmail, setEmail] = useFormInput(
@@ -35,7 +35,7 @@ export default function MainView() {
       <View style={styles.container}>
         <AppTitle />
         <View style={styles.topInnerContainer}>
-          <FormWrapper formHeader="Welcome Back!">
+          <FormWrapper formHeader="Sign up">
             <TextBox
               label="Email"
               autoCompleteType="email"
@@ -44,23 +44,6 @@ export default function MainView() {
               textAlign="center"
               textContentType="emailAddress"
               {...email}
-            />
-            <TextBox
-              label="Password"
-              secureTextEntry={!showPassword}
-              autoCompleteType="password"
-              importantForAutofill="auto"
-              keyboardType="visible-password"
-              textAlign="center"
-              textContentType="password"
-              {...password}
-              icon={{
-                icon: showPassword ? 'eye' : 'eye-off',
-                disabled: false,
-                animated: true,
-                accessibilityLabel: 'textBox icon',
-                onPress: val => setShowPassword(!showPassword),
-              }}
             />
             <Button
               icon="login"
@@ -71,20 +54,12 @@ export default function MainView() {
               onPress={() => onLogin()}>
               Sign In
             </Button>
-            <View style={styles.forgotPasswordView}>
-              <Button
-                mode="text"
-                compact={true}
-                onPress={() => console.log('forgot password')}>
-                Forgot your password?
-              </Button>
-            </View>
             <View style={styles.signUpView}>
-              <Text>Don't have an account? </Text>
+              <Text>Already have a backcpacker account? </Text>
               <Button
                 mode="text"
                 compact={true}
-                onPress={() => console.log('signup')}>
+                onPress={() => console.log('signin')}>
                 Sign Up
               </Button>
             </View>

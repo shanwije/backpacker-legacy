@@ -6,6 +6,7 @@ import {
   LOGIN_FAILED,
   LOGIN_RESPONSE,
   LOG_OUT,
+    SET_SIGN_UP,
 } from './const/types';
 import {
   LOGIN_ENABLE_LOADER,
@@ -34,3 +35,8 @@ export const enableLoader = () => createAction({ type: LOGIN_ENABLE_LOADER });
 export const disableLoader = () => createAction({ type: LOGIN_DISABLE_LOADER });
 
 export const logOut = () => createAction({ type: LOG_OUT });
+
+//---------------
+
+export const setSignUp = isSignUp =>
+  createAction({ type: SET_SIGN_UP, payload: isSignUp });

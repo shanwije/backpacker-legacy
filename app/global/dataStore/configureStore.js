@@ -3,13 +3,14 @@ import { persistStore, persistCombineReducers } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 import { createLogger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
+import {LOGIN_REDUCER, LOADING_REDUCER} from './reducers/reducerTypes';
 import combinedReducers from './reducers/combinedReducers';
 import rootSaga from './sagas';
 
 const config = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['loadingReducer'],
+  blacklist: [LOGIN_REDUCER, LOADING_REDUCER],
   debug: true, //to get useful logging
 };
 

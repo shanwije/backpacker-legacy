@@ -5,16 +5,16 @@ import { useSelector } from 'react-redux';
 
 import { navigationRef } from './NavigationService';
 
-import signIn from '../../modules/Login/src/views/signIn';
+import signIn from '../../modules/Login/src/views/SignInView';
 
 import HomeMainBottomTabNavigator from './HomeMainBottomTabNavigator';
+import LoginNavigator from '../../modules/Login/loginNavigator';
 import { LOGIN_REDUCER } from '../dataStore/reducers/reducerTypes';
 
 const Stack = createStackNavigator();
 
 function App() {
   const isLoggedIn = useSelector(state => state[LOGIN_REDUCER].isLoggedIn);
-
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
@@ -26,14 +26,9 @@ function App() {
           />
         ) : (
           <Stack.Screen
-            name="signIn"
-            component={signIn}
-            options={{
-              // When logging out, a pop animation feels intuitive
-              // You can remove this if you want the default 'push' animation
-              animationTypeForReplace: isLoggedIn ? 'push' : 'pop',
-              headerShown: false,
-            }}
+            name="loginNavigator"
+            component={LoginNavigator}
+            options={{ headerShown: false }}
           />
         )}
       </Stack.Navigator>

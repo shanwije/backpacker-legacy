@@ -1,3 +1,4 @@
-const PREFIX = 'http://100.102.86.31:5000/api/v1';
+import config from './../../../../config';
 
-export const AUTHENTICATE = `${PREFIX}/auth/sign-in`;
+export const AUTHENTICATE = `${config.BASE_URL}auth/sign-in`;
+

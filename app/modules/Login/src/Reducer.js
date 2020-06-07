@@ -8,6 +8,7 @@ import {
   LOGIN_RESPONSE,
   LOGIN_LOADING_ENDED,
   LOG_OUT,
+    SET_SIGN_UP,
 } from './const/types';
 import _ from 'lodash';
 
@@ -16,6 +17,7 @@ const initialState = {
   id: 0,
   username: '',
   password: '',
+  isSignUp: false,
 };
 
 const loginReducer = createReducer(initialState, {
@@ -46,6 +48,13 @@ const loginReducer = createReducer(initialState, {
     return {
       ...state,
       isLoggedIn: false,
+    };
+  },
+  [SET_SIGN_UP](state, action) {
+    console.log("XXXXXXXXXXXXXXXXXX",action);
+    return {
+      ...state,
+      isSignUp: action.payload,
     };
   },
 });
