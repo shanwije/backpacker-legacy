@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import validateValue from '../utils/textValidators';
 import { COMMON } from '../const/InputTypes';
 
-export default function useFormInput(initialType = COMMON, initialValue = '') {
+export default function useFormInput(initialType = COMMON, trim = false, initialValue = '') {
   const [value, setValue] = useState(initialValue);
   const type = useState(initialType)[0];
   const [errorText, setErrorText] = useState('');
@@ -10,7 +10,7 @@ export default function useFormInput(initialType = COMMON, initialValue = '') {
   const [disableSubmit, setDisableSubmit] = useState(true);
 
   const onChangeText = text => {
-    setValue(text);
+    setValue(trim ? text.trim() : text);
 
     if (errorText === '') {
       if (validateValue(value, type)) {
@@ -31,8 +31,7 @@ export default function useFormInput(initialType = COMMON, initialValue = '') {
       }
     }
   };
-
-  const onEndEditing = () => {
+  const updateInputOnOutOfFocus = () => {
     if (errorText === '') {
       if (validateValue(value, type)) {
         setDisableSubmit(false);
@@ -44,6 +43,13 @@ export default function useFormInput(initialType = COMMON, initialValue = '') {
         setShowError(true);
       }
     }
+  };
+
+  const onEndEditing = () => {
+    updateInputOnOutOfFocus();
+  };
+  const onBlur = () => {
+    updateInputOnOutOfFocus();
   };
 
   useEffect(() => {}, [value]);

@@ -38,3 +38,7 @@ npx react-native run-android --variant=release
 
 keep     "crypto-js": "3.1.9-1",
 (latest 4.0.0 has an error)
+
+-------
+
+Return key type : "done","go","next","search","send","none","previous","default","emergency-call","google","join","route","yahoo"

@@ -18,9 +18,11 @@ export default function SignInView() {
   const dispatch = useDispatch();
   const [email, disableSubmitByEmail, setEmail] = useFormInput(
     inputTypes.EMAIL,
+    true,
   );
   const [password, disableSubmitByPassword, setPassword] = useFormInput(
     inputTypes.PASSWORD,
+    false,
   );
   const [showPassword, setShowPassword] = useState(false);
 
@@ -47,6 +49,12 @@ export default function SignInView() {
               keyboardType="email-address"
               textAlign="center"
               textContentType="emailAddress"
+              // for smooth navigation through inputs
+              // "done","go","next","search","send","none","previous","default","emergency-call","google","join","route","yahoo"
+              blurOnSubmit={false}
+              autoCorrect={true}
+              autoFocus={true}
+              returnKeyType="none"
               {...email}
             />
             <TextBox
@@ -56,6 +64,16 @@ export default function SignInView() {
               importantForAutofill="auto"
               textAlign="center"
               textContentType="password"
+              // for smooth navigation through inputs
+              // blurOnSubmit={false}
+              returnKeyType={
+                disableSubmitByEmail || disableSubmitByPassword
+                  ? 'default'
+                  : 'send'
+              }
+              onSubmitEditing={() =>
+                disableSubmitByEmail || disableSubmitByPassword ? '' : onLogin()
+              }
               {...password}
               icon={{
                 icon: showPassword ? 'eye' : 'eye-off',
@@ -84,10 +102,7 @@ export default function SignInView() {
             </View>
             <View style={styles.signUpView}>
               <Text>Don't have an account? </Text>
-              <Button
-                mode="text"
-                compact={true}
-                onPress={() => onSignUp()}>
+              <Button mode="text" compact={true} onPress={() => onSignUp()}>
                 Sign Up
               </Button>
             </View>
