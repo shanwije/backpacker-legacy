@@ -11,7 +11,8 @@
     "update:pods": "cd ios && pod install --repo-update && cd ..",
     "postinstall": "yarn run update:pods",
     "clean-android": "cd android && ./gradlew clean && cd ../ && yarn react-native run-android",
-    "set-icon-android": "react-native set-icon --path <path_to_png> --background <icon_background_color> --platform <android|ios>"
+    "set-icon-android": "react-native set-icon --path ./app/global/assets/icon.png --platform android",
+    "prettier": "prettier --write '**/*.{ts,js,css,html}'"
   },
   "dependencies": {
     "@bam.tech/react-native-make": "^3.0.0",
