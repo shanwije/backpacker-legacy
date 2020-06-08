@@ -21,6 +21,7 @@ const TextBox = props => {
                         // marginBottom: 10,
                         left: draggingDistance,
                         width: '100%',
+                        backgroundColor: 'transparent',
                     }}
                     mode="flat"
                     {...props}

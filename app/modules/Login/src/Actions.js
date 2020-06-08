@@ -7,12 +7,20 @@ import {
     LOGIN_RESPONSE,
     LOG_OUT,
     SET_SIGN_UP,
+    SET_EMAIL,
 } from './const/types';
 import {
     LOGIN_ENABLE_LOADER,
     LOGIN_DISABLE_LOADER,
 } from './../../../global/dataStore/const/commonActionTypes';
 import createAction from './../../../global/dataStore/actions/createAction';
+
+export function setEmail(email) {
+    createAction({
+        type: SET_EMAIL,
+        payload: { email },
+    });
+}
 
 export const requestLogin = (email, password) =>
     createAction({

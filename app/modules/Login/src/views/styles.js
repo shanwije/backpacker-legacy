@@ -4,17 +4,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        // backgroundColor: 'yellow',
+
         paddingLeft: 10,
         paddingRight: 10,
-        justifyContent: 'center',
-        alignContent: 'center',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        // backgroundColor: '#121212'
     },
     topInnerContainer: {
-        flex: 4,
+        flex: 3,
         flexDirection: 'column',
-        justifyContent: 'flex-start',
         alignContent: 'center',
+        justifyContent: 'flex-start',
     },
     // login: {
     //   padding: 8,

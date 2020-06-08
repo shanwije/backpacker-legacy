@@ -8,12 +8,12 @@ import FormWrapper from '../../../../global/components/FormWrapper';
 
 import styles from './styles';
 import { LOGIN_REDUCER } from '../../../../global/dataStore/reducers/reducerTypes';
-import backgroundImage from './../../../../assets/images/login_background.jpg';
 import AppTitle from '../../../../global/components/AppTitle';
 import useFormInput from '../../../../global/customHooks/useFormInput';
 import inputTypes from '../../../../global/const/InputTypes';
+import { loginScreens } from '../../../../global/navigation/screens';
 
-export default function SignInView() {
+export default function SignInView({ navigation }) {
     const id = useSelector(state => state[LOGIN_REDUCER].id);
     const dispatch = useDispatch();
     const [email, disableSubmitByEmail, setEmail] = useFormInput(
@@ -34,88 +34,85 @@ export default function SignInView() {
     };
 
     return (
-        <ImageBackground
-            source={backgroundImage}
-            width={null}
-            style={styles.backgroundImage}>
-            <View style={styles.container}>
-                <AppTitle />
-                <View style={styles.topInnerContainer}>
-                    <FormWrapper formHeader="Welcome Back!">
-                        <TextBox
-                            label="Email"
-                            autoCompleteType="email"
-                            importantForAutofill="auto"
-                            keyboardType="email-address"
-                            textAlign="center"
-                            textContentType="emailAddress"
-                            // for smooth navigation through inputs
-                            // "done","go","next","search","send","none","previous","default","emergency-call","google","join","route","yahoo"
-                            blurOnSubmit={false}
-                            autoCorrect={true}
-                            autoFocus={true}
-                            returnKeyType="next"
-                            {...email}
-                        />
-                        <TextBox
-                            label="Password"
-                            secureTextEntry={!showPassword}
-                            autoCompleteType="password"
-                            importantForAutofill="auto"
-                            textAlign="center"
-                            textContentType="password"
-                            // for smooth navigation through inputs
-                            // blurOnSubmit={false}
-                            returnKeyType={
-                                disableSubmitByEmail || disableSubmitByPassword
-                                    ? 'default'
-                                    : 'send'
-                            }
-                            onSubmitEditing={() =>
-                                disableSubmitByEmail || disableSubmitByPassword
-                                    ? ''
-                                    : onLogin()
-                            }
-                            {...password}
-                            icon={{
-                                icon: showPassword ? 'eye' : 'eye-off',
-                                disabled: false,
-                                animated: true,
-                                accessibilityLabel: 'textBox icon',
-                                onPress: val => setShowPassword(!showPassword),
-                            }}
-                        />
+        <View style={styles.container}>
+            <AppTitle />
+            <View style={styles.topInnerContainer}>
+                <FormWrapper formHeader="Welcome Back!">
+                    <TextBox
+                        label="Email"
+                        autoCompleteType="email"
+                        importantForAutofill="auto"
+                        keyboardType="email-address"
+                        textAlign="center"
+                        textContentType="emailAddress"
+                        // for smooth navigation through inputs
+                        // "done","go","next","search","send","none","previous","default","emergency-call","google","join","route","yahoo"
+                        blurOnSubmit={false}
+                        autoCorrect={true}
+                        autoFocus={true}
+                        returnKeyType="next"
+                        {...email}
+                    />
+                    <TextBox
+                        label="Password"
+                        secureTextEntry={!showPassword}
+                        autoCompleteType="password"
+                        importantForAutofill="auto"
+                        textAlign="center"
+                        textContentType="password"
+                        // for smooth navigation through inputs
+                        // blurOnSubmit={false}
+                        returnKeyType={
+                            disableSubmitByEmail || disableSubmitByPassword
+                                ? 'default'
+                                : 'send'
+                        }
+                        onSubmitEditing={() =>
+                            disableSubmitByEmail || disableSubmitByPassword
+                                ? ''
+                                : onLogin()
+                        }
+                        {...password}
+                        icon={{
+                            icon: showPassword ? 'eye' : 'eye-off',
+                            disabled: false,
+                            animated: true,
+                            accessibilityLabel: 'textBox icon',
+                            onPress: val => setShowPassword(!showPassword),
+                        }}
+                    />
+                    <Button
+                        icon="login"
+                        mode="contained"
+                        type="submit"
+                        value="Submit"
+                        disabled={
+                            disableSubmitByEmail || disableSubmitByPassword
+                        }
+                        onPress={() => onLogin()}>
+                        Sign In
+                    </Button>
+                    <View style={styles.forgotPasswordView}>
                         <Button
-                            icon="login"
-                            mode="contained"
-                            type="submit"
-                            value="Submit"
-                            disabled={
-                                disableSubmitByEmail || disableSubmitByPassword
-                            }
-                            onPress={() => onLogin()}>
-                            Sign In
+                            mode="text"
+                            compact={true}
+                            onPress={() => console.log('forgot password')}>
+                            Forgot your password?
                         </Button>
-                        <View style={styles.forgotPasswordView}>
-                            <Button
-                                mode="text"
-                                compact={true}
-                                onPress={() => console.log('forgot password')}>
-                                Forgot your password?
-                            </Button>
-                        </View>
-                        <View style={styles.signUpView}>
-                            <Text>Don't have an account? </Text>
-                            <Button
-                                mode="text"
-                                compact={true}
-                                onPress={() => onSignUp()}>
-                                Sign Up
-                            </Button>
-                        </View>
-                    </FormWrapper>
-                </View>
+                    </View>
+                    <View style={styles.signUpView}>
+                        <Text>Don't have an account? </Text>
+                        <Button
+                            mode="text"
+                            compact={true}
+                            onPress={() =>
+                                navigation.push(loginScreens.SIGN_UP_SCREEN)
+                            }>
+                            Sign Up
+                        </Button>
+                    </View>
+                </FormWrapper>
             </View>
-        </ImageBackground>
+        </View>
     );
 }

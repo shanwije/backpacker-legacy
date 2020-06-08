@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { navigationRef } from './NavigationService';
 
 import HomeMainBottomTabNavigator from './HomeMainBottomTabNavigator';
-import LoginNavigator from '../../modules/Login/loginNavigator';
+import LoginNavigator from '../../modules/Login/src/views/loginNavigator';
 
 import { AUTH_REDUCER } from '../dataStore/reducers/reducerTypes';
 
@@ -14,19 +14,17 @@ const Stack = createStackNavigator();
 function App() {
     const isLoggedIn = useSelector(state => state[AUTH_REDUCER].isLoggedIn);
     return (
-        <NavigationContainer ref={navigationRef}>
-            <Stack.Navigator>
+        <NavigationContainer>
+            <Stack.Navigator headerMode={false}>
                 {isLoggedIn ? (
                     <Stack.Screen
                         name="HomeMainBottomTabNavigator"
                         component={HomeMainBottomTabNavigator}
-                        options={{ headerShown: false }}
                     />
                 ) : (
                     <Stack.Screen
                         name="loginNavigator"
                         component={LoginNavigator}
-                        options={{ headerShown: false }}
                     />
                 )}
             </Stack.Navigator>

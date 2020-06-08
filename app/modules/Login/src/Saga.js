@@ -59,3 +59,10 @@ export function* logoutSaga(action) {
     // }
     yield put(authActions.setSignOut());
 }
+
+export function* setEmailSaga(action) {
+    console.log(action);
+    //todo call backend and validate email, if not show error and re ask for an email,
+    // otherwise navigate to the next page
+    yield put(loginActions.setEmail(action.payload));
+}
