@@ -10,25 +10,25 @@ import configureStore from './global/dataStore/configureStore';
 const { persistor, store } = configureStore();
 
 const theme = {
-  ...DefaultTheme,
-  roundness: 5,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#000',
-    accent: '#fff',
-  },
+    ...DefaultTheme,
+    roundness: 5,
+    colors: {
+        ...DefaultTheme.colors,
+        primary: '#000',
+        accent: '#fff',
+    },
 };
 
 export default function EntryPoint() {
-  return (
-    <Provider store={store}>
-      <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
-        <PaperProvider theme={theme}>
-          <StatusBar hidden />
-          <Navigator />
-          <AppSnackBar />
-        </PaperProvider>
-      </PersistGate>
-    </Provider>
-  );
+    return (
+        <Provider store={store}>
+            <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
+                <PaperProvider theme={theme}>
+                    <StatusBar hidden />
+                    <Navigator />
+                    <AppSnackBar />
+                </PaperProvider>
+            </PersistGate>
+        </Provider>
+    );
 }

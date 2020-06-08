@@ -14,58 +14,60 @@ import useFormInput from '../../../../global/customHooks/useFormInput';
 import inputTypes from '../../../../global/const/InputTypes';
 
 export default function SignUpView() {
-  const id = useSelector(state => state[LOGIN_REDUCER].id);
-  const dispatch = useDispatch();
-  const [email, disableSubmitByEmail, setEmail] = useFormInput(
-    inputTypes.EMAIL,
-  );
-  const [password, disableSubmitByPassword, setPassword] = useFormInput(
-    inputTypes.PASSWORD,
-  );
-  const [showPassword, setShowPassword] = useState(false);
+    const id = useSelector(state => state[LOGIN_REDUCER].id);
+    const dispatch = useDispatch();
+    const [email, disableSubmitByEmail, setEmail] = useFormInput(
+        inputTypes.EMAIL,
+    );
+    const [password, disableSubmitByPassword, setPassword] = useFormInput(
+        inputTypes.PASSWORD,
+    );
+    const [showPassword, setShowPassword] = useState(false);
 
-  const onLogin = () =>
-    dispatch(loginActions.requestLogin(email.value, password.value));
+    const onLogin = () =>
+        dispatch(loginActions.requestLogin(email.value, password.value));
 
-  return (
-    <ImageBackground
-      source={backgroundImage}
-      width={null}
-      style={styles.backgroundImage}>
-      <View style={styles.container}>
-        <AppTitle />
-        <View style={styles.topInnerContainer}>
-          <FormWrapper formHeader="Sign up">
-            <TextBox
-              label="Email"
-              autoCompleteType="email"
-              importantForAutofill="auto"
-              keyboardType="email-address"
-              textAlign="center"
-              textContentType="emailAddress"
-              {...email}
-            />
-            <Button
-              icon="login"
-              mode="contained"
-              type="submit"
-              value="Submit"
-              disabled={disableSubmitByEmail || disableSubmitByPassword}
-              onPress={() => onLogin()}>
-              Sign In
-            </Button>
-            <View style={styles.signUpView}>
-              <Text>Already have a backcpacker account? </Text>
-              <Button
-                mode="text"
-                compact={true}
-                onPress={() => console.log('signin')}>
-                Sign Up
-              </Button>
+    return (
+        <ImageBackground
+            source={backgroundImage}
+            width={null}
+            style={styles.backgroundImage}>
+            <View style={styles.container}>
+                <AppTitle />
+                <View style={styles.topInnerContainer}>
+                    <FormWrapper formHeader="Sign up">
+                        <TextBox
+                            label="Email"
+                            autoCompleteType="email"
+                            importantForAutofill="auto"
+                            keyboardType="email-address"
+                            textAlign="center"
+                            textContentType="emailAddress"
+                            {...email}
+                        />
+                        <Button
+                            icon="login"
+                            mode="contained"
+                            type="submit"
+                            value="Submit"
+                            disabled={
+                                disableSubmitByEmail || disableSubmitByPassword
+                            }
+                            onPress={() => onLogin()}>
+                            Sign In
+                        </Button>
+                        <View style={styles.signUpView}>
+                            <Text>Already have a backcpacker account? </Text>
+                            <Button
+                                mode="text"
+                                compact={true}
+                                onPress={() => console.log('signin')}>
+                                Sign Up
+                            </Button>
+                        </View>
+                    </FormWrapper>
+                </View>
             </View>
-          </FormWrapper>
-        </View>
-      </View>
-    </ImageBackground>
-  );
+        </ImageBackground>
+    );
 }

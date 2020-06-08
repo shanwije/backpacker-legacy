@@ -12,29 +12,29 @@ import HomeMainBottomTabNavigator from '../../global/navigation/HomeMainBottomTa
 const Stack = createStackNavigator();
 
 function LoginNavigator() {
-  const isSignUp = useSelector(state => state[LOGIN_REDUCER].isSignUp);
-  console.log("CCCCCCCCCCCCCCCCCCCCCCC", isSignUp);
-  return (
-    <NavigationContainer ref={navigationRef} independent={true}>
-      <Stack.Navigator>
-        {isSignUp ? (
-          <Stack.Screen
-            name="sign-up-page-01"
-            component={signUp}
-            options={{ headerShown: false }}
-          />
-        ) : (
-          <Stack.Screen
-            name="signIn"
-            component={signIn}
-            options={{
-              headerShown: false,
-            }}
-          />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+    const isSignUp = useSelector(state => state[LOGIN_REDUCER].isSignUp);
+    console.log('CCCCCCCCCCCCCCCCCCCCCCC', isSignUp);
+    return (
+        <NavigationContainer ref={navigationRef} independent={true}>
+            <Stack.Navigator>
+                {isSignUp ? (
+                    <Stack.Screen
+                        name="sign-up-page-01"
+                        component={signUp}
+                        options={{ headerShown: false }}
+                    />
+                ) : (
+                    <Stack.Screen
+                        name="signIn"
+                        component={signIn}
+                        options={{
+                            headerShown: false,
+                        }}
+                    />
+                )}
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
 
 export default LoginNavigator;

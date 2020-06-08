@@ -42,3 +42,11 @@ keep     "crypto-js": "3.1.9-1",
 -------
 
 Return key type : "done","go","next","search","send","none","previous","default","emergency-call","google","join","route","yahoo"
+
+--------------
+
+run prettier on entire package
+
+cd app
+
+prettier --write "**/*.js"

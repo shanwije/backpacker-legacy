@@ -12,26 +12,26 @@ import { AUTH_REDUCER } from '../dataStore/reducers/reducerTypes';
 const Stack = createStackNavigator();
 
 function App() {
-  const isLoggedIn = useSelector(state => state[AUTH_REDUCER].isLoggedIn);
-  return (
-    <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator>
-        {isLoggedIn ? (
-          <Stack.Screen
-            name="HomeMainBottomTabNavigator"
-            component={HomeMainBottomTabNavigator}
-            options={{ headerShown: false }}
-          />
-        ) : (
-          <Stack.Screen
-            name="loginNavigator"
-            component={LoginNavigator}
-            options={{ headerShown: false }}
-          />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+    const isLoggedIn = useSelector(state => state[AUTH_REDUCER].isLoggedIn);
+    return (
+        <NavigationContainer ref={navigationRef}>
+            <Stack.Navigator>
+                {isLoggedIn ? (
+                    <Stack.Screen
+                        name="HomeMainBottomTabNavigator"
+                        component={HomeMainBottomTabNavigator}
+                        options={{ headerShown: false }}
+                    />
+                ) : (
+                    <Stack.Screen
+                        name="loginNavigator"
+                        component={LoginNavigator}
+                        options={{ headerShown: false }}
+                    />
+                )}
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
 
 export default App;

@@ -7,14 +7,14 @@ import * as loginActions from './../../../Login/src/Actions';
 import styles from './styles';
 
 export default function MainView() {
-  const dispatch = useDispatch();
-  const onLogout = () => dispatch(loginActions.logOut());
+    const dispatch = useDispatch();
+    const onLogout = () => dispatch(loginActions.logOut());
 
-  return (
-    <View style={styles.container}>
-      <Button icon="logout" mode="contained" onPress={onLogout}>
-        Logout
-      </Button>
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <Button icon="logout" mode="contained" onPress={onLogout}>
+                Logout
+            </Button>
+        </View>
+    );
 }

@@ -14,101 +14,108 @@ import useFormInput from '../../../../global/customHooks/useFormInput';
 import inputTypes from '../../../../global/const/InputTypes';
 
 export default function SignInView() {
-  const id = useSelector(state => state[LOGIN_REDUCER].id);
-  const dispatch = useDispatch();
-  const [email, disableSubmitByEmail, setEmail] = useFormInput(
-    inputTypes.EMAIL,
-    true,
-  );
-  const [password, disableSubmitByPassword, setPassword] = useFormInput(
-    inputTypes.PASSWORD,
-    false,
-  );
-  const [showPassword, setShowPassword] = useState(false);
+    const id = useSelector(state => state[LOGIN_REDUCER].id);
+    const dispatch = useDispatch();
+    const [email, disableSubmitByEmail, setEmail] = useFormInput(
+        inputTypes.EMAIL,
+        true,
+    );
+    const [password, disableSubmitByPassword, setPassword] = useFormInput(
+        inputTypes.PASSWORD,
+        false,
+    );
+    const [showPassword, setShowPassword] = useState(false);
 
-  const onLogin = () =>
-    dispatch(loginActions.requestLogin(email.value, password.value));
+    const onLogin = () =>
+        dispatch(loginActions.requestLogin(email.value, password.value));
 
-  const onSignUp = () => {
-    dispatch(loginActions.setSignUp(true));
-  };
+    const onSignUp = () => {
+        dispatch(loginActions.setSignUp(true));
+    };
 
-  return (
-    <ImageBackground
-      source={backgroundImage}
-      width={null}
-      style={styles.backgroundImage}>
-      <View style={styles.container}>
-        <AppTitle />
-        <View style={styles.topInnerContainer}>
-          <FormWrapper formHeader="Welcome Back!">
-            <TextBox
-              label="Email"
-              autoCompleteType="email"
-              importantForAutofill="auto"
-              keyboardType="email-address"
-              textAlign="center"
-              textContentType="emailAddress"
-              // for smooth navigation through inputs
-              // "done","go","next","search","send","none","previous","default","emergency-call","google","join","route","yahoo"
-              blurOnSubmit={false}
-              autoCorrect={true}
-              autoFocus={true}
-              returnKeyType="none"
-              {...email}
-            />
-            <TextBox
-              label="Password"
-              secureTextEntry={!showPassword}
-              autoCompleteType="password"
-              importantForAutofill="auto"
-              textAlign="center"
-              textContentType="password"
-              // for smooth navigation through inputs
-              // blurOnSubmit={false}
-              returnKeyType={
-                disableSubmitByEmail || disableSubmitByPassword
-                  ? 'default'
-                  : 'send'
-              }
-              onSubmitEditing={() =>
-                disableSubmitByEmail || disableSubmitByPassword ? '' : onLogin()
-              }
-              {...password}
-              icon={{
-                icon: showPassword ? 'eye' : 'eye-off',
-                disabled: false,
-                animated: true,
-                accessibilityLabel: 'textBox icon',
-                onPress: val => setShowPassword(!showPassword),
-              }}
-            />
-            <Button
-              icon="login"
-              mode="contained"
-              type="submit"
-              value="Submit"
-              disabled={disableSubmitByEmail || disableSubmitByPassword}
-              onPress={() => onLogin()}>
-              Sign In
-            </Button>
-            <View style={styles.forgotPasswordView}>
-              <Button
-                mode="text"
-                compact={true}
-                onPress={() => console.log('forgot password')}>
-                Forgot your password?
-              </Button>
+    return (
+        <ImageBackground
+            source={backgroundImage}
+            width={null}
+            style={styles.backgroundImage}>
+            <View style={styles.container}>
+                <AppTitle />
+                <View style={styles.topInnerContainer}>
+                    <FormWrapper formHeader="Welcome Back!">
+                        <TextBox
+                            label="Email"
+                            autoCompleteType="email"
+                            importantForAutofill="auto"
+                            keyboardType="email-address"
+                            textAlign="center"
+                            textContentType="emailAddress"
+                            // for smooth navigation through inputs
+                            // "done","go","next","search","send","none","previous","default","emergency-call","google","join","route","yahoo"
+                            blurOnSubmit={false}
+                            autoCorrect={true}
+                            autoFocus={true}
+                            returnKeyType="next"
+                            {...email}
+                        />
+                        <TextBox
+                            label="Password"
+                            secureTextEntry={!showPassword}
+                            autoCompleteType="password"
+                            importantForAutofill="auto"
+                            textAlign="center"
+                            textContentType="password"
+                            // for smooth navigation through inputs
+                            // blurOnSubmit={false}
+                            returnKeyType={
+                                disableSubmitByEmail || disableSubmitByPassword
+                                    ? 'default'
+                                    : 'send'
+                            }
+                            onSubmitEditing={() =>
+                                disableSubmitByEmail || disableSubmitByPassword
+                                    ? ''
+                                    : onLogin()
+                            }
+                            {...password}
+                            icon={{
+                                icon: showPassword ? 'eye' : 'eye-off',
+                                disabled: false,
+                                animated: true,
+                                accessibilityLabel: 'textBox icon',
+                                onPress: val => setShowPassword(!showPassword),
+                            }}
+                        />
+                        <Button
+                            icon="login"
+                            mode="contained"
+                            type="submit"
+                            value="Submit"
+                            disabled={
+                                disableSubmitByEmail || disableSubmitByPassword
+                            }
+                            onPress={() => onLogin()}>
+                            Sign In
+                        </Button>
+                        <View style={styles.forgotPasswordView}>
+                            <Button
+                                mode="text"
+                                compact={true}
+                                onPress={() => console.log('forgot password')}>
+                                Forgot your password?
+                            </Button>
+                        </View>
+                        <View style={styles.signUpView}>
+                            <Text>Don't have an account? </Text>
+                            <Button
+                                mode="text"
+                                compact={true}
+                                onPress={() => onSignUp()}>
+                                Sign Up
+                            </Button>
+                        </View>
+                    </FormWrapper>
+                </View>
             </View>
-            <View style={styles.signUpView}>
-              <Text>Don't have an account? </Text>
-              <Button mode="text" compact={true} onPress={() => onSignUp()}>
-                Sign Up
-              </Button>
-            </View>
-          </FormWrapper>
-        </View>
-      </View>
-    </ImageBackground>
-  );
+        </ImageBackground>
+    );
 }
