@@ -4,6 +4,7 @@ import * as errorActions from './../../../global/dataStore/actions/errorActions'
 import * as authActions from './../../../global/dataStore/actions/authActions';
 import _ from 'lodash';
 import { authenticate, logout } from './Repository';
+import { loginScreens } from '../../../global/navigation/screens';
 
 export function* loginSaga(action) {
     yield put(loginActions.enableLoader());
@@ -64,5 +65,6 @@ export function* setEmailSaga(action) {
     console.log(action);
     //todo call backend and validate email, if not show error and re ask for an email,
     // otherwise navigate to the next page
-    yield put(loginActions.setEmail(action.payload));
+    yield put(loginActions.storeEmail(action.payload.email));
+    action.payload.navigation.push(loginScreens.SIGN_UP_SCREEN_PASSWORD);
 }

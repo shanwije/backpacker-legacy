@@ -8,19 +8,33 @@ import {
     LOG_OUT,
     SET_SIGN_UP,
     SET_EMAIL,
+    STORE_EMAIL,
+    SET_PASSWORD,
 } from './const/types';
 import {
     LOGIN_ENABLE_LOADER,
     LOGIN_DISABLE_LOADER,
-} from './../../../global/dataStore/const/commonActionTypes';
+} from '../../../global/dataStore/const/commonActionTypes';
 import createAction from './../../../global/dataStore/actions/createAction';
 
-export function setEmail(email) {
+export const setPassword = (email, navigation) =>
+    createAction({
+        type: SET_PASSWORD,
+        payload: { email, navigation },
+    });
+
+
+export const setEmail = (email,  navigation) =>
     createAction({
         type: SET_EMAIL,
+        payload: { email, navigation },
+    });
+
+export const storeEmail = email =>
+    createAction({
+        type: STORE_EMAIL,
         payload: { email },
     });
-}
 
 export const requestLogin = (email, password) =>
     createAction({

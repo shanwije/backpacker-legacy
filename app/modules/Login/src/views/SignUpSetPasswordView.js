@@ -13,46 +13,24 @@ import useFormInput from '../../../../global/customHooks/useFormInput';
 import inputTypes from '../../../../global/const/InputTypes';
 import { loginScreens } from '../../../../global/navigation/screens';
 
-export default function SignInView({ navigation }) {
-    const id = useSelector(state => state[LOGIN_REDUCER].id);
+export default function SignUpSetPasswordView({ navigation }) {
+    const initialPassword = useSelector(state => state[LOGIN_REDUCER].password);
+    console.log('initialEmail', initialPassword);
     const dispatch = useDispatch();
-    const [email, disableSubmitByEmail, setEmail] = useFormInput(
-        inputTypes.EMAIL,
-        true,
-    );
     const [password, disableSubmitByPassword, setPassword] = useFormInput(
         inputTypes.PASSWORD,
         false,
     );
     const [showPassword, setShowPassword] = useState(false);
 
-    const onLogin = () =>
-        dispatch(loginActions.requestLogin(email.value, password.value));
-
-    const onSignUp = () => {
-        dispatch(loginActions.setSignUp(true));
-    };
+    const setUserPassword = () =>
+        dispatch(loginActions.setPassword(password.value));
 
     return (
         <View style={styles.container}>
-            {/*<AppTitle />*/}
+            <AppTitle />
             <View style={styles.topInnerContainer}>
-                <FormWrapper formHeader="Welcome Back!">
-                    <TextBox
-                        label="Email"
-                        autoCompleteType="email"
-                        importantForAutofill="auto"
-                        keyboardType="email-address"
-                        textAlign="center"
-                        textContentType="emailAddress"
-                        // for smooth navigation through inputs
-                        // "done","go","next","search","send","none","previous","default","emergency-call","google","join","route","yahoo"
-                        blurOnSubmit={false}
-                        autoCorrect={true}
-                        autoFocus={true}
-                        returnKeyType="next"
-                        {...email}
-                    />
+                <FormWrapper formHeader="Let's set a password for you">
                     <TextBox
                         label="Password"
                         secureTextEntry={!showPassword}
@@ -63,14 +41,10 @@ export default function SignInView({ navigation }) {
                         // for smooth navigation through inputs
                         // blurOnSubmit={false}
                         returnKeyType={
-                            disableSubmitByEmail || disableSubmitByPassword
-                                ? 'default'
-                                : 'send'
+                            disableSubmitByPassword ? 'default' : 'send'
                         }
                         onSubmitEditing={() =>
-                            disableSubmitByEmail || disableSubmitByPassword
-                                ? ''
-                                : onLogin()
+                            disableSubmitByPassword ? '' : setUserPassword()
                         }
                         {...password}
                         icon={{
@@ -86,31 +60,19 @@ export default function SignInView({ navigation }) {
                         mode="contained"
                         type="submit"
                         value="Submit"
-                        disabled={
-                            disableSubmitByEmail || disableSubmitByPassword
-                        }
-                        onPress={() => onLogin()}>
-                        Sign In
+                        disabled={disableSubmitByPassword}
+                        onPress={() => setUserPassword()}>
+                        Sign UP
                     </Button>
-                    <View style={styles.forgotPasswordView}>
-                        <Button
-                            mode="text"
-                            compact={true}
-                            onPress={() => console.log('forgot password')}>
-                            Forgot your password?
-                        </Button>
-                    </View>
                     <View style={styles.signUpView}>
-                        <Text>Don't have an account? </Text>
+                        <Text>Already have a Backpacker account? </Text>
                         <Button
                             mode="text"
                             compact={true}
                             onPress={() =>
-                                navigation.push(
-                                    loginScreens.SIGN_UP_SCREEN_EMAIL,
-                                )
+                                navigation.navigate(loginScreens.SIGN_IN_SCREEN)
                             }>
-                            Sign Up
+                            Sign IN
                         </Button>
                     </View>
                 </FormWrapper>

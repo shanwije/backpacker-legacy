@@ -4,20 +4,13 @@
 import createReducer from '../../../global/dataStore/reducers/createReducer';
 import {
     LOGIN_REQUEST,
-    LOGIN_FAILED,
-    LOGIN_RESPONSE,
-    LOGIN_LOADING_ENDED,
-    LOG_OUT,
-    SET_SIGN_UP,
+    STORE_EMAIL,
 } from './const/types';
 import _ from 'lodash';
 
 const initialState = {
-    isLoggedIn: false,
-    id: 0,
-    username: '',
+    email: '',
     password: '',
-    isSignUp: false,
 };
 
 const loginReducer = createReducer(initialState, {
@@ -28,33 +21,11 @@ const loginReducer = createReducer(initialState, {
             password: _.get(action, 'payload.password', ''),
         };
     },
-    [LOGIN_LOADING_ENDED](state) {
-        return { ...state };
-    },
-    [LOGIN_RESPONSE](state, action) {
-        return {
-            ...state,
-            id: _.get(action, 'payload.id', ''),
-            isLoggedIn: true,
-        };
-    },
-    [LOGIN_FAILED](state) {
-        return {
-            ...state,
-            isLoggedIn: false,
-        };
-    },
-    [LOG_OUT](state) {
-        return {
-            ...state,
-            isLoggedIn: false,
-        };
-    },
-    [SET_SIGN_UP](state, action) {
+    [STORE_EMAIL](state, action) {
         console.log('XXXXXXXXXXXXXXXXXX', action);
         return {
             ...state,
-            isSignUp: action.payload,
+            email: action.payload.email,
         };
     },
 });

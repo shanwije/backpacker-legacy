@@ -8,8 +8,9 @@ import {
 import { useSelector } from 'react-redux';
 
 import { navigationRef } from '../../../../global/navigation/NavigationService';
-import signUp from './SignUpView';
+import signUpEmail from './SignUpSetEmailView';
 import signIn from './SignInView';
+import signUpPassword from './SignUpSetPasswordView';
 import { LOGIN_REDUCER } from '../../../../global/dataStore/reducers/reducerTypes';
 import { loginScreens } from '../../../../global/navigation/screens';
 
@@ -47,10 +48,6 @@ function LoginNavigator() {
                     gestureDirection: 'horizontal',
                     ...TransitionPresets.SlideFromRightIOS,
                 }}
-                // transitionSpec={{
-                //     open: config,
-                //     close: closeConfig,
-                // }}
                 headerMode={false}
                 animation="fade">
                 <Stack.Screen
@@ -58,8 +55,12 @@ function LoginNavigator() {
                     component={signIn}
                 />
                 <Stack.Screen
-                    name={loginScreens.SIGN_UP_SCREEN}
-                    component={signUp}
+                    name={loginScreens.SIGN_UP_SCREEN_EMAIL}
+                    component={signUpEmail}
+                />
+                <Stack.Screen
+                    name={loginScreens.SIGN_UP_SCREEN_PASSWORD}
+                    component={signUpPassword}
                 />
             </Stack.Navigator>
         </NavigationContainer>

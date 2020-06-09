@@ -12,10 +12,10 @@ const styles = StyleSheet.create({
         // backgroundColor: '#121212'
     },
     topInnerContainer: {
-        flex: 3,
+        flex: 2,
         flexDirection: 'column',
         alignContent: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'flex-end',
     },
     // login: {
     //   padding: 8,

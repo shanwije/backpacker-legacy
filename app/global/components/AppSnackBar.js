@@ -1,7 +1,7 @@
 import React from 'react';
 import { Snackbar } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
-import { ERROR_REDUCER } from './../dataStore/reducers/reducerTypes';
+import { ERROR_REDUCER } from '../dataStore/reducers/reducerTypes';
 import { clearError } from '../dataStore/actions/errorActions';
 
 const AppSnackBar = props => {
