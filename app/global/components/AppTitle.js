@@ -7,27 +7,24 @@ import backgroundImage from './../../assets/images/backpacker_text_logo.png';
 const AppTitle = props => (
     <View
         style={{
-            height: 200,
+            height: 70,
             justifyContent: 'center',
             alignContent: 'center',
             flexWrap: 'wrap',
             flexDirection: 'row',
+            top: 0,
+            // position: 'absolute',
+            // width: '100%',
         }}>
         <Image
-            style={{ alignSelf: 'center', height: '60%', width: '60%' }}
+            style={{
+                alignSelf: 'center',
+                height: 40,
+                width: 100,
+                marginTop: 5,
+            }}
             source={backgroundImage}
         />
-        {/*<Text*/}
-        {/*    style={{*/}
-        {/*        fontSize: 30,*/}
-        {/*        fontWeight: '700',*/}
-        {/*        textAlign: 'center',*/}
-        {/*        // fontStyle: 'italic',*/}
-        {/*        fontFamily: 'Cochin',*/}
-        {/*    }}*/}
-        {/*    {...props}>*/}
-        {/*    {props.title || 'Backpacker'}*/}
-        {/*</Text>*/}
     </View>
 );
 

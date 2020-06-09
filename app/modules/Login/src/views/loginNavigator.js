@@ -13,6 +13,7 @@ import signIn from './SignInView';
 import signUpPassword from './SignUpSetPasswordView';
 import { LOGIN_REDUCER } from '../../../../global/dataStore/reducers/reducerTypes';
 import { loginScreens } from '../../../../global/navigation/screens';
+import AppTitle from './../../../../global/components/AppTitle';
 
 const Stack = createStackNavigator();
 
@@ -46,9 +47,19 @@ function LoginNavigator() {
                 screenOptions={{
                     gestureEnabled: true,
                     gestureDirection: 'horizontal',
+                    headerStyle: {
+                        backgroundColor: 'transparent',
+                        borderTopWidth: 0,
+                        elevation: 0,
+                        shadowOpacity: 0,
+                    },
+                    headerTitle: props => <AppTitle {...props} />,
+                    title: 'Centered title',
+                    headerShown: true,
+                    headerTitleAlign: 'center',
                     ...TransitionPresets.SlideFromRightIOS,
                 }}
-                headerMode={false}
+                // headerMode={false}
                 animation="fade">
                 <Stack.Screen
                     name={loginScreens.SIGN_IN_SCREEN}

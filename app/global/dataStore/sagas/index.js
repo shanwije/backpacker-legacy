@@ -18,5 +18,4 @@ export default function* watch() {
     yield all([takeEvery(LOGIN_REQUEST, loginSaga)]);
     yield all([takeEvery(LOG_OUT, logoutSaga)]);
     yield all([takeEvery(SET_EMAIL, setEmailSaga)]);
-
 }

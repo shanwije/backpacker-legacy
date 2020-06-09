@@ -4,19 +4,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-
-        paddingLeft: 10,
-        paddingRight: 10,
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: '#121212'
     },
     topInnerContainer: {
-        flex: 2,
+        flex: 1,
+        justifyContent: 'center',
         flexDirection: 'column',
-        alignContent: 'center',
-        justifyContent: 'flex-end',
     },
+
     // login: {
     //   padding: 8,
     // },
@@ -28,27 +24,22 @@ const styles = StyleSheet.create({
     //   left: 20,
     //   width: '100%',
     // },
-    backgroundImage: {
-        flex: 1,
-        resizeMode: 'cover',
-        justifyContent: 'center',
-        alignContent: 'center',
-        width: null,
-        height: null,
-    },
-    // formButton: {
-    //   // height: 50,
-    //   justifyContent: 'center',
-    //   marginTop: 5,
-    //   // backgroundColor: 'rgba(181, 181, 181, 1)',
+    // backgroundImage: {
+    //     flex: 1,
+    //     resizeMode: 'cover',
+    //     justifyContent: 'center',
+    //     alignContent: 'center',
+    //     width: null,
+    //     height: null,
     // },
-    mainTitleText: {
-        color: '#fff',
-        fontSize: 30,
-        textAlign: 'center',
-        marginBottom: 30,
-        fontWeight: '500',
-    },
+
+    // mainTitleText: {
+    //     color: '#fff',
+    //     fontSize: 30,
+    //     textAlign: 'center',
+    //     marginBottom: 30,
+    //     fontWeight: '500',
+    // },
     forgotPasswordView: {
         marginTop: 10,
         flexDirection: 'column',

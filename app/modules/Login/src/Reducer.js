@@ -2,10 +2,7 @@
  * handles login states in the app
  */
 import createReducer from '../../../global/dataStore/reducers/createReducer';
-import {
-    LOGIN_REQUEST,
-    STORE_EMAIL,
-} from './const/types';
+import { LOGIN_REQUEST, STORE_EMAIL } from './const/types';
 import _ from 'lodash';
 
 const initialState = {

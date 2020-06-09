@@ -12,7 +12,9 @@ import AppTitle from '../../../../global/components/AppTitle';
 import useFormInput from '../../../../global/customHooks/useFormInput';
 import inputTypes from '../../../../global/const/InputTypes';
 import { loginScreens } from '../../../../global/navigation/screens';
+import LoginHeaderText from '../../../../global/components/LoginHeaderText';
 
+// todo remove unnecessary padding to the sides
 export default function SignUpSetEmailView({ navigation }) {
     const dispatch = useDispatch();
     const [email, disableSubmitByEmail, setEmail] = useFormInput(
@@ -26,9 +28,12 @@ export default function SignUpSetEmailView({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <AppTitle />
+            <LoginHeaderText
+                headerText="Sign Up"
+                subHeaderText="Please enter your email address"
+            />
             <View style={styles.topInnerContainer}>
-                <FormWrapper formHeader="Please provide your email address">
+                <FormWrapper>
                     <TextBox
                         label="Email"
                         autoCompleteType="email"

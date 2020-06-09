@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, ImageBackground } from 'react-native';
-import { Text, Button } from 'react-native-paper';
+import {
+    View
+} from 'react-native';
+import { Text, Button, Divider } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import * as loginActions from '../Actions';
 import TextBox from '../../../../global/components/TextBox';
@@ -12,6 +14,7 @@ import AppTitle from '../../../../global/components/AppTitle';
 import useFormInput from '../../../../global/customHooks/useFormInput';
 import inputTypes from '../../../../global/const/InputTypes';
 import { loginScreens } from '../../../../global/navigation/screens';
+import LoginHeaderText from '../../../../global/components/LoginHeaderText';
 
 export default function SignInView({ navigation }) {
     const id = useSelector(state => state[LOGIN_REDUCER].id);
@@ -35,9 +38,12 @@ export default function SignInView({ navigation }) {
 
     return (
         <View style={styles.container}>
-            {/*<AppTitle />*/}
+            <LoginHeaderText
+                headerText="Sign In"
+                subHeaderText="Please enter your email and password"
+            />
             <View style={styles.topInnerContainer}>
-                <FormWrapper formHeader="Welcome Back!">
+                <FormWrapper>
                     <TextBox
                         label="Email"
                         autoCompleteType="email"
@@ -92,6 +98,7 @@ export default function SignInView({ navigation }) {
                         onPress={() => onLogin()}>
                         Sign In
                     </Button>
+                    <Divider inset={true} />
                     <View style={styles.forgotPasswordView}>
                         <Button
                             mode="text"

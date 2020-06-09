@@ -12,6 +12,7 @@ import AppTitle from '../../../../global/components/AppTitle';
 import useFormInput from '../../../../global/customHooks/useFormInput';
 import inputTypes from '../../../../global/const/InputTypes';
 import { loginScreens } from '../../../../global/navigation/screens';
+import LoginHeaderText from '../../../../global/components/LoginHeaderText';
 
 export default function SignUpSetPasswordView({ navigation }) {
     const initialPassword = useSelector(state => state[LOGIN_REDUCER].password);
@@ -28,9 +29,12 @@ export default function SignUpSetPasswordView({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <AppTitle />
+            <LoginHeaderText
+                headerText="Password"
+                subHeaderText="Let's setup a password for you"
+            />
             <View style={styles.topInnerContainer}>
-                <FormWrapper formHeader="Let's set a password for you">
+                <FormWrapper>
                     <TextBox
                         label="Password"
                         secureTextEntry={!showPassword}

@@ -23,8 +23,7 @@ export const setPassword = (email, navigation) =>
         payload: { email, navigation },
     });
 
-
-export const setEmail = (email,  navigation) =>
+export const setEmail = (email, navigation) =>
     createAction({
         type: SET_EMAIL,
         payload: { email, navigation },
