@@ -1,23 +1,33 @@
 import React from 'react';
-import { Snackbar } from 'react-native-paper';
+import _ from 'lodash';
+import { Snackbar, Text } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
-import { ERROR_REDUCER } from '../dataStore/reducers/reducerTypes';
-import { clearError } from '../dataStore/actions/errorActions';
+import { NOTIFICATION_REDUCER } from '../dataStore/reducers/reducerTypes';
+import { clearNotification } from '../dataStore/actions/notificationActions';
 
 const AppSnackBar = props => {
-    const error = useSelector(state => state[ERROR_REDUCER].error);
+    const message = useSelector(state => state[NOTIFICATION_REDUCER].message);
+    const code = useSelector(state => state[NOTIFICATION_REDUCER].code);
+    console.log('snack bar message', message);
+    console.log('snack bar code', code);
+
+    const notificationColor =
+        code && parseInt(code.charAt(0), 10) > 2 ? '#B00020' : '#001ba0';
+
     const dispatch = useDispatch();
     return (
         <Snackbar
-            visible={error.length > 0}
+            accessibilityignoresinvertcolors={true}
+            theme={{ colors: { text: '#ffffff' } }}
+            visible={_.get(message, 'length', 0) > 0}
             onDismiss={val => console.log('dismiss', val)}
             action={{
                 label: 'clear',
                 onPress: () => {
-                    dispatch(clearError());
+                    dispatch(clearNotification());
                 },
             }}>
-            {error}
+            <Text style={{ color: notificationColor }}> {message}</Text>
         </Snackbar>
     );
 };

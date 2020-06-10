@@ -1,5 +1,5 @@
 import { AUTHENTICATE } from './const/url';
-import { fetch } from './../../../global/utils/restUtils';
+import { fetch } from '../../../global/apiConfig/restUtils';
 import { methods } from './../../../global/const/RESTConst';
 import _ from 'lodash';
 

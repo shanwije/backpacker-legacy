@@ -3,7 +3,7 @@ import {
     statusCodes,
     commonHeaders,
     default_timeout_duration,
-} from './../const/RESTConst';
+} from '../const/RESTConst';
 import axios from 'axios';
 
 export const fetch = (
@@ -32,6 +32,7 @@ export const fetch = (
             url,
             method,
             data,
+            validateStatus: () => true,
             headers: _.isEmpty(headers)
                 ? _.assign({}, headers, getHeaders())
                 : getHeaders(),
@@ -50,16 +51,34 @@ export const fetch = (
                 ) {
                     resolve(res);
                 } else {
-                    reject(res);
+                    reject({
+                        message: _.get(
+                            res,
+                            'data.message',
+                            'Oops, something went wrong',
+                        ),
+                        code: _.get(res, 'data.code', res.status),
+                    });
                 }
+                // }
             })
             .catch(err => {
                 if (__DEV__) {
+                    console.log(`error : ${JSON.stringify(err, null, '\t')}`);
                     console.log(
-                        `Response error : ${JSON.stringify(err, null, '\t')}`,
+                        `error.response : ${JSON.stringify(
+                            err.response,
+                            null,
+                            '\t',
+                        )}`,
                     );
                 }
-                reject(err);
+                reject(
+                    _.get(err, 'response.data.error', {
+                        message: _.get(err, 'message'),
+                        code: _.get(err, 'status'),
+                    }),
+                );
             });
     });
 };

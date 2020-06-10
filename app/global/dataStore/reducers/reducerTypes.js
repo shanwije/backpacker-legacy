@@ -1,4 +1,4 @@
 export const LOGIN_REDUCER = 'login';
 export const LOADING_REDUCER = 'loading';
-export const ERROR_REDUCER = 'error';
+export const NOTIFICATION_REDUCER = 'snackNotification';
 export const AUTH_REDUCER = 'auth';

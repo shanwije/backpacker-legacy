@@ -14,47 +14,57 @@ export default function useFormInput(
     const [disableSubmit, setDisableSubmit] = useState(true);
 
     const onChangeText = text => {
+        if(!validateValue(text, type)){
+            setDisableSubmit(true);
+            setErrorText('invalid ' + type);
+            setShowError(true);
+        } else {
+            setDisableSubmit(false);
+            setErrorText('');
+            setShowError(false);
+        }
         setValue(trim ? text.trim() : text);
 
-        if (errorText === '') {
-            if (validateValue(value, type)) {
-                setDisableSubmit(false);
-            } else {
-                setDisableSubmit(true);
-            }
-        } else {
+        //
+        // if (errorText === '') {
+        //     if (validateValue(value, type)) {
+        //         setDisableSubmit(false);
+        //     } else {
+        //         setDisableSubmit(true);
+        //     }
+        // } else {
             //already an invalid input
-            if (validateValue(value, type)) {
-                setDisableSubmit(false);
-                setErrorText('');
-                setShowError(false);
-            } else {
-                setDisableSubmit(true);
-                setErrorText('invalid ' + type);
-                setShowError(true);
-            }
-        }
+            // if (validateValue(value, type)) {
+            //     setDisableSubmit(false);
+            //     setErrorText('');
+            //     setShowError(false);
+            // } else {
+            //     setDisableSubmit(true);
+            //     setErrorText('invalid ' + type);
+            //     setShowError(true);
+            // }
+        // }
     };
-    const updateInputOnOutOfFocus = () => {
-        if (errorText === '') {
-            if (validateValue(value, type)) {
-                setDisableSubmit(false);
-                setErrorText('');
-                setShowError(false);
-            } else {
-                setDisableSubmit(true);
-                setErrorText('invalid ' + type);
-                setShowError(true);
-            }
-        }
-    };
+    // const updateInputOnOutOfFocus = () => {
+    //     if (errorText === '') {
+    //         if (validateValue(value, type)) {
+    //             setDisableSubmit(false);
+    //             setErrorText('');
+    //             setShowError(false);
+    //         } else {
+    //             setDisableSubmit(true);
+    //             setErrorText('invalid ' + type);
+    //             setShowError(true);
+    //         }
+    //     }
+    // };
 
     const onEndEditing = () => {
-        updateInputOnOutOfFocus();
+        // updateInputOnOutOfFocus();
     };
-    const onBlur = () => {
-        updateInputOnOutOfFocus();
-    };
+    // const onBlur = () => {
+    //     updateInputOnOutOfFocus();
+    // };
 
     useEffect(() => {}, [value]);
 

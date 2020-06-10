@@ -1,16 +1,15 @@
 import { put, call } from 'redux-saga/effects';
 import * as loginActions from './Actions';
-import * as errorActions from './../../../global/dataStore/actions/errorActions';
+import * as errorActions from '../../../global/dataStore/actions/notificationActions';
 import * as authActions from './../../../global/dataStore/actions/authActions';
 import _ from 'lodash';
 import { authenticate, logout } from './Repository';
 import { loginScreens } from '../../../global/navigation/screens';
+import { getHttpErrorMsg } from '../../../global/utils/utils';
 
 export function* loginSaga(action) {
     yield put(loginActions.enableLoader());
-
     const { email, password } = _.get(action, 'payload');
-
     console.log('log in ', email);
 
     try {
@@ -19,18 +18,17 @@ export function* loginSaga(action) {
             yield put(authActions.setSignIn(response));
             yield put(loginActions.disableLoader({}));
         } else {
+            console.log('Res', response);
             yield put(
-                errorActions.setError('Username or Password is incorrect'),
+                errorActions.setNotification(
+                    'Username or Password is incorrect',
+                ),
             );
             yield put(authActions.setSignOut());
             yield put(loginActions.disableLoader({}));
         }
     } catch (err) {
-        yield put(
-            errorActions.setError(
-                `Oops, Unexpected error has occurred\n${_.get(err, 'message')}`,
-            ),
-        );
+        yield put(errorActions.setNotification(err));
         yield put(authActions.setSignOut());
         yield put(loginActions.disableLoader({}));
     }
@@ -47,12 +45,12 @@ export function* logoutSaga(action) {
     //     yield put(loginActions.disableLoader({}));
     //     //todo put a success snackbar
     //   } else {
-    //     yield put(errorActions.setError(_.get(response, 'error', 'error')));
+    //     yield put(notificationActions.setNotification(_.get(response, 'error', 'error')));
     //     yield put(loginActions.disableLoader({}));
     //   }
     // } catch (err) {
     //   yield put(
-    //     errorActions.setError(
+    //     notificationActions.setNotification(
     //       `Oops, Unexpected error has occurred\n${_.get(err, 'message')}`,
     //     ),
     //   );

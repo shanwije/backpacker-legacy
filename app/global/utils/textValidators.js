@@ -11,12 +11,11 @@ export const validatePassword = password => {
 
 const validateValue = (value, type) => {
     const { EMAIL, PASSWORD, COMMON } = inputTypes;
-    console.log(value, type);
     switch (type) {
         case EMAIL:
-            return validateEmail(value);
+            return validateEmail(value.trim().toLowerCase());
         case PASSWORD:
-            return validatePassword(value);
+            return validatePassword(value.trim());
         case COMMON:
         default:
             return true;
