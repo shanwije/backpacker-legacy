@@ -1,9 +1,9 @@
 import { put, call } from 'redux-saga/effects';
 import * as loginActions from './Actions';
-import * as errorActions from '../../../global/dataStore/actions/notificationActions';
+import * as notificationActions from '../../../global/dataStore/actions/notificationActions';
 import * as authActions from './../../../global/dataStore/actions/authActions';
 import _ from 'lodash';
-import { authenticate, logout } from './Repository';
+import { authenticate, setAuthEmail } from './Repository';
 import { loginScreens } from '../../../global/navigation/screens';
 import { getHttpErrorMsg } from '../../../global/utils/utils';
 
@@ -13,22 +13,23 @@ export function* loginSaga(action) {
     console.log('log in ', email);
 
     try {
-        let response = yield call(() => authenticate(email, password));
+        const response = yield call(() => authenticate(email, password));
         if (response.success) {
             yield put(authActions.setSignIn(response));
             yield put(loginActions.disableLoader({}));
         } else {
             console.log('Res', response);
             yield put(
-                errorActions.setNotification(
-                    'Username or Password is incorrect',
-                ),
+                notificationActions.setNotification({
+                    message: 'Error',
+                    code: '500',
+                }),
             );
             yield put(authActions.setSignOut());
             yield put(loginActions.disableLoader({}));
         }
     } catch (err) {
-        yield put(errorActions.setNotification(err));
+        yield put(notificationActions.setNotification(err));
         yield put(authActions.setSignOut());
         yield put(loginActions.disableLoader({}));
     }
@@ -60,9 +61,36 @@ export function* logoutSaga(action) {
 }
 
 export function* setEmailSaga(action) {
-    console.log(action);
-    //todo call backend and validate email, if not show error and re ask for an email,
-    // otherwise navigate to the next page
-    yield put(loginActions.storeEmail(action.payload.email));
-    action.payload.navigation.push(loginScreens.SIGN_UP_SCREEN_PASSWORD);
+    try {
+        const { email } = _.get(action, 'payload');
+        yield put(loginActions.enableLoader());
+        const response = yield call(() => setAuthEmail(email));
+        if (response.success) {
+            yield put(loginActions.storeEmail(action.payload.email));
+            yield put(loginActions.disableLoader({}));
+            action.payload.navigation.push(
+                loginScreens.SIGN_UP_SCREEN_EMAIL_TOKEN,
+            );
+            yield put(
+                notificationActions.setNotification({
+                    message:
+                        'We have sent you a 6 number token, please check your email',
+                    code: '200',
+                }),
+            );
+        } else {
+            console.log('Res', response);
+            yield put(
+                notificationActions.setNotification({
+                    message: 'Error',
+                    code: '500',
+                }),
+            );
+            yield put(authActions.setSignOut());
+            yield put(loginActions.disableLoader({}));
+        }
+    } catch (err) {
+        yield put(notificationActions.setNotification(err));
+        yield put(loginActions.disableLoader({}));
+    }
 }

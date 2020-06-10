@@ -12,7 +12,9 @@ const AppSnackBar = props => {
     console.log('snack bar code', code);
 
     const notificationColor =
-        code && parseInt(code.charAt(0), 10) > 2 ? '#B00020' : '#001ba0';
+        code && parseInt(code.toString().charAt(0), 10) > 2
+            ? '#B00020'
+            : '#001ba0';
 
     const dispatch = useDispatch();
     return (

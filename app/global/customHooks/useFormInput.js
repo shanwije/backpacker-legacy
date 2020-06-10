@@ -14,7 +14,9 @@ export default function useFormInput(
     const [disableSubmit, setDisableSubmit] = useState(true);
 
     const onChangeText = text => {
-        if(!validateValue(text, type)){
+        console.log(text);
+        text = trim && text ? text.trim() : text;
+        if (!validateValue(text, type)) {
             setDisableSubmit(true);
             setErrorText('invalid ' + type);
             setShowError(true);
@@ -23,57 +25,29 @@ export default function useFormInput(
             setErrorText('');
             setShowError(false);
         }
-        setValue(trim ? text.trim() : text);
-
-        //
-        // if (errorText === '') {
-        //     if (validateValue(value, type)) {
-        //         setDisableSubmit(false);
-        //     } else {
-        //         setDisableSubmit(true);
-        //     }
-        // } else {
-            //already an invalid input
-            // if (validateValue(value, type)) {
-            //     setDisableSubmit(false);
-            //     setErrorText('');
-            //     setShowError(false);
-            // } else {
-            //     setDisableSubmit(true);
-            //     setErrorText('invalid ' + type);
-            //     setShowError(true);
-            // }
-        // }
+        setValue(text);
     };
-    // const updateInputOnOutOfFocus = () => {
-    //     if (errorText === '') {
-    //         if (validateValue(value, type)) {
-    //             setDisableSubmit(false);
-    //             setErrorText('');
-    //             setShowError(false);
-    //         } else {
-    //             setDisableSubmit(true);
-    //             setErrorText('invalid ' + type);
-    //             setShowError(true);
-    //         }
-    //     }
-    // };
 
-    const onEndEditing = () => {
-        // updateInputOnOutOfFocus();
+    const onFocus = () => {
+        if (!validateValue(value, type)) {
+            setDisableSubmit(true);
+            setErrorText('invalid ' + type);
+            setShowError(true);
+        } else {
+            setDisableSubmit(false);
+            setErrorText('');
+            setShowError(false);
+        }
     };
-    // const onBlur = () => {
-    //     updateInputOnOutOfFocus();
-    // };
 
-    useEffect(() => {}, [value]);
+    // useEffect(() => {}, [value]);
 
     const bind = {
         value,
         error: showError,
         errorText,
         onChangeText,
-        onEndEditing,
+        onFocus,
     };
 
     return [bind, disableSubmit, setValue];

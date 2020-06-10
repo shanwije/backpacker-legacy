@@ -14,52 +14,59 @@ import inputTypes from '../../../../global/const/InputTypes';
 import { loginScreens } from '../../../../global/navigation/screens';
 import LoginHeaderText from '../../../../global/components/LoginHeaderText';
 
-// todo remove unnecessary padding to the sides
-export default function SignUpSetEmailView({ navigation }) {
+export default function SignUpSetEmailTokenView({ navigation }) {
+    const initialPassword = useSelector(state => state[LOGIN_REDUCER].password);
+    console.log('initialEmail', initialPassword);
     const dispatch = useDispatch();
-    const [email, disableSubmitByEmail, setEmail] = useFormInput(
-        inputTypes.EMAIL,
-        true,
-        useSelector(state => state[LOGIN_REDUCER].email),
+    const [password, disableSubmitByPassword, setPassword] = useFormInput(
+        inputTypes.PASSWORD,
+        false,
     );
+    const [showPassword, setShowPassword] = useState(false);
 
-    const setEmailAddress = () =>
-        dispatch(loginActions.setEmail(email.value, navigation));
+    const setUserPassword = () =>
+        dispatch(loginActions.setPassword(password.value));
 
     return (
         <View style={styles.container}>
             <LoginHeaderText
-                headerText="Sign Up"
-                subHeaderText="Please enter your email address"
+                headerText="Email Token"
+                subHeaderText="Please enter the received one time password from your email"
             />
             <View style={styles.topInnerContainer}>
                 <FormWrapper>
                     <TextBox
-                        label="Email"
-                        autoCompleteType="email"
+                        label="Password"
+                        secureTextEntry={!showPassword}
+                        autoCompleteType="password"
                         importantForAutofill="auto"
-                        keyboardType="email-address"
                         textAlign="center"
-                        textContentType="emailAddress"
-                        blurOnSubmit={true}
-                        autoCorrect={true}
-                        autoFocus={true}
-                        {...email}
+                        textContentType="password"
+                        // for smooth navigation through inputs
+                        // blurOnSubmit={false}
                         returnKeyType={
-                            disableSubmitByEmail ? 'default' : 'send'
+                            disableSubmitByPassword ? 'default' : 'send'
                         }
                         onSubmitEditing={() =>
-                            disableSubmitByEmail ? '' : setEmailAddress()
+                            disableSubmitByPassword ? '' : setUserPassword()
                         }
+                        {...password}
+                        icon={{
+                            icon: showPassword ? 'eye' : 'eye-off',
+                            disabled: false,
+                            animated: true,
+                            accessibilityLabel: 'textBox icon',
+                            onPress: val => setShowPassword(!showPassword),
+                        }}
                     />
                     <Button
                         icon="login"
                         mode="contained"
                         type="submit"
                         value="Submit"
-                        disabled={disableSubmitByEmail}
-                        onPress={() => setEmailAddress()}>
-                        NEXT
+                        disabled={disableSubmitByPassword}
+                        onPress={() => setUserPassword()}>
+                        Sign UP
                     </Button>
                     <View style={styles.signUpView}>
                         <Text>Already have a Backpacker account? </Text>

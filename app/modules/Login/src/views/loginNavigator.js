@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 
 import { navigationRef } from '../../../../global/navigation/NavigationService';
 import signUpEmail from './SignUpSetEmailView';
+import signUpEmailToken from './SignUpSetEmailTokenView';
 import signIn from './SignInView';
 import signUpPassword from './SignUpSetPasswordView';
 import { LOGIN_REDUCER } from '../../../../global/dataStore/reducers/reducerTypes';
@@ -68,6 +69,10 @@ function LoginNavigator() {
                 <Stack.Screen
                     name={loginScreens.SIGN_UP_SCREEN_EMAIL}
                     component={signUpEmail}
+                />
+                <Stack.Screen
+                    name={loginScreens.SIGN_UP_SCREEN_EMAIL_TOKEN}
+                    component={signUpEmailToken}
                 />
                 <Stack.Screen
                     name={loginScreens.SIGN_UP_SCREEN_PASSWORD}

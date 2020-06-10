@@ -4,21 +4,17 @@ import { KeyboardAvoidingView, View, ScrollView } from 'react-native';
 import { Surface, Text } from 'react-native-paper';
 
 const FormWrapper = props => (
-
-    <ScrollView bounces={true}>
+    <ScrollView bounces={true} keyboardShouldPersistTaps="always">
         <KeyboardAvoidingView
             style={{
                 paddingTop: '5%',
                 paddingBottom: '5%',
                 paddingLeft: 20,
                 paddingRight: 20,
-
-
             }}>
             {props.children}
         </KeyboardAvoidingView>
     </ScrollView>
-
 );
 
 export default FormWrapper;

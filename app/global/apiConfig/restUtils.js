@@ -76,7 +76,7 @@ export const fetch = (
                 reject(
                     _.get(err, 'response.data.error', {
                         message: _.get(err, 'message'),
-                        code: _.get(err, 'status'),
+                        code: _.get(err, 'status').toString(),
                     }),
                 );
             });

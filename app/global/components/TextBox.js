@@ -24,6 +24,7 @@ const TextBox = props => {
                         backgroundColor: 'transparent',
                     }}
                     mode="flat"
+                    enablesReturnKeyAutomatically={true}
                     {...props}
                 />
                 {props.icon && (
