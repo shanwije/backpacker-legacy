@@ -33,10 +33,8 @@ export const fetch = (
             method,
             data,
             validateStatus: () => true,
-            headers: _.isEmpty(headers)
-                ? _.assign({}, headers, getHeaders())
-                : getHeaders(),
-            timeout: timeout,
+            headers,
+            timeout,
         })
             .then(res => {
                 if (__DEV__) {
@@ -76,7 +74,7 @@ export const fetch = (
                 reject(
                     _.get(err, 'response.data.error', {
                         message: _.get(err, 'message'),
-                        code: _.get(err, 'status').toString(),
+                        code: _.toString(_.get(err, 'status', 500)),
                     }),
                 );
             });

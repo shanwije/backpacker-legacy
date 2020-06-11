@@ -11,8 +11,10 @@ const loginHeaderText = props => (
             marginBottom: 10,
             height: '30%',
         }}>
-        <Text style={{ fontSize: 35, textAlign: 'left' }}>{props.headerText}</Text>
-        <Text style={{ fontSize: 20, textAlign: 'left', marginTop: 10 }}>
+        <Text style={{ fontSize: 35, textAlign: 'left' }}>
+            {props.headerText}
+        </Text>
+        <Text style={{ fontSize: 17, textAlign: 'left', marginTop: 10 }}>
             {props.subHeaderText}
         </Text>
     </View>

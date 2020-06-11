@@ -2,12 +2,18 @@
  * handles login states in the app
  */
 import createReducer from '../../../global/dataStore/reducers/createReducer';
-import { LOGIN_REQUEST, STORE_EMAIL } from './const/types';
+import {
+    LOGIN_REQUEST,
+    STORE_EMAIL,
+    SET_PASSWORD_BEARER,
+    CLEAR_SIGN_UP_DATA,
+} from './const/types';
 import _ from 'lodash';
 
 const initialState = {
     email: '',
     password: '',
+    bearer: '',
 };
 
 const loginReducer = createReducer(initialState, {
@@ -19,10 +25,21 @@ const loginReducer = createReducer(initialState, {
         };
     },
     [STORE_EMAIL](state, action) {
-        console.log('XXXXXXXXXXXXXXXXXX', action);
         return {
             ...state,
             email: action.payload.email,
+        };
+    },
+    [SET_PASSWORD_BEARER](state, action) {
+        console.log('XXXXXXXXXXXXXXXXXX', action);
+        return {
+            ...state,
+            bearer: action.payload.token,
+        };
+    },
+    [CLEAR_SIGN_UP_DATA]() {
+        return {
+            ...initialState,
         };
     },
 });

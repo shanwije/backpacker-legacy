@@ -12,7 +12,7 @@ const authReducer = createReducer(initialState, {
         console.log('auth payload', action);
         return {
             ...state,
-            isLoggedIn: _.get(action, 'payload.success', false),
+            isLoggedIn: true,
             authToken: _.get(action, 'payload.token', ''),
         };
     },

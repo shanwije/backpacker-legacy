@@ -10,6 +10,9 @@ import {
     SET_EMAIL,
     STORE_EMAIL,
     SET_PASSWORD,
+    SET_EMAIL_AUTH_TOKEN,
+    SET_PASSWORD_BEARER,
+    CLEAR_SIGN_UP_DATA,
 } from './const/types';
 import {
     LOGIN_ENABLE_LOADER,
@@ -17,10 +20,28 @@ import {
 } from '../../../global/dataStore/const/commonActionTypes';
 import createAction from './../../../global/dataStore/actions/createAction';
 
-export const setPassword = (email, navigation) =>
+export const clearSignupData = () =>
+    createAction({
+        type: CLEAR_SIGN_UP_DATA,
+        payload: {},
+    });
+
+export const setPasswordBearer = token =>
+    createAction({
+        type: SET_PASSWORD_BEARER,
+        payload: { token },
+    });
+
+export const setEmailAuthToken = (token, navigation) =>
+    createAction({
+        type: SET_EMAIL_AUTH_TOKEN,
+        payload: { token, navigation },
+    });
+
+export const setPassword = (password, navigation) =>
     createAction({
         type: SET_PASSWORD,
-        payload: { email, navigation },
+        payload: { password, navigation },
     });
 
 export const setEmail = (email, navigation) =>

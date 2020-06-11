@@ -8,3 +8,6 @@ export const SET_SIGN_UP = 'SET_SIGN_UP';
 export const SET_EMAIL = 'SET_EMAIL';
 export const STORE_EMAIL = 'STORE_EMAIL';
 export const SET_PASSWORD = 'SET_PASSWORD';
+export const SET_EMAIL_AUTH_TOKEN = 'SET_EMAIL_AUTH_TOKEN';
+export const SET_PASSWORD_BEARER = 'SET_PASSWORD_BEARER';
+export const CLEAR_SIGN_UP_DATA = 'CLEAR_SIGN_UP_DATA';

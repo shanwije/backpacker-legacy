@@ -3,80 +3,59 @@ import { View, ImageBackground } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import * as loginActions from '../Actions';
-import TextBox from '../../../../global/components/TextBox';
 import FormWrapper from '../../../../global/components/FormWrapper';
-
 import styles from './styles';
-import { LOGIN_REDUCER } from '../../../../global/dataStore/reducers/reducerTypes';
-import AppTitle from '../../../../global/components/AppTitle';
-import useFormInput from '../../../../global/customHooks/useFormInput';
-import inputTypes from '../../../../global/const/InputTypes';
 import { loginScreens } from '../../../../global/navigation/screens';
 import LoginHeaderText from '../../../../global/components/LoginHeaderText';
+import OTPInputView from '@twotalltotems/react-native-otp-input';
+import {
+    NOTIFICATION_REDUCER,
+    LOGIN_REDUCER,
+} from '../../../../global/dataStore/reducers/reducerTypes';
+import { BackHandler } from 'react-native';
 
 export default function SignUpSetEmailTokenView({ navigation }) {
-    const initialPassword = useSelector(state => state[LOGIN_REDUCER].password);
-    console.log('initialEmail', initialPassword);
+    //set token
+    const email = useSelector(state => state[LOGIN_REDUCER].email);
     const dispatch = useDispatch();
-    const [password, disableSubmitByPassword, setPassword] = useFormInput(
-        inputTypes.PASSWORD,
-        false,
-    );
-    const [showPassword, setShowPassword] = useState(false);
+    const submitAuthToken = tokenInput =>
+        dispatch(loginActions.setEmailAuthToken(tokenInput, navigation));
 
-    const setUserPassword = () =>
-        dispatch(loginActions.setPassword(password.value));
+    const resendToken = () =>
+        dispatch(loginActions.setEmail(email, navigation));
 
     return (
         <View style={styles.container}>
             <LoginHeaderText
-                headerText="Email Token"
-                subHeaderText="Please enter the received one time password from your email"
+                headerText="We sent you a code"
+                subHeaderText={`Enter it below to verify ${email}`}
             />
             <View style={styles.topInnerContainer}>
                 <FormWrapper>
-                    <TextBox
-                        label="Password"
-                        secureTextEntry={!showPassword}
-                        autoCompleteType="password"
-                        importantForAutofill="auto"
-                        textAlign="center"
-                        textContentType="password"
-                        // for smooth navigation through inputs
-                        // blurOnSubmit={false}
-                        returnKeyType={
-                            disableSubmitByPassword ? 'default' : 'send'
-                        }
-                        onSubmitEditing={() =>
-                            disableSubmitByPassword ? '' : setUserPassword()
-                        }
-                        {...password}
-                        icon={{
-                            icon: showPassword ? 'eye' : 'eye-off',
-                            disabled: false,
-                            animated: true,
-                            accessibilityLabel: 'textBox icon',
-                            onPress: val => setShowPassword(!showPassword),
+                    <OTPInputView
+                        style={{ height: 80, marginBottom: 100 }}
+                        codeInputFieldStyle={{
+                            borderWidth: 0,
+                            borderBottomWidth: 3,
+                            color: '#000',
+                            fontSize: 25,
                         }}
+                        codeInputHighlightStyle={{ borderColor: '#001ba0' }}
+                        autoFocusOnLoad
+                        pinCount={5}
+                        onCodeFilled={code => {
+                            submitAuthToken(code);
+                        }}
+                        placeholderCharacter={'0'}
+                        placeholderTextColor={'rgba(0, 0, 0, 0.3)'}
                     />
-                    <Button
-                        icon="login"
-                        mode="contained"
-                        type="submit"
-                        value="Submit"
-                        disabled={disableSubmitByPassword}
-                        onPress={() => setUserPassword()}>
-                        Sign UP
-                    </Button>
                     <View style={styles.signUpView}>
-                        <Text>Already have a Backpacker account? </Text>
+                        <Text>Any problem? </Text>
                         <Button
                             mode="text"
                             compact={true}
-                            onPress={() =>
-                                navigation.navigate(loginScreens.SIGN_IN_SCREEN)
-                            }>
-                            Sign IN
+                            onPress={() => resendToken()}>
+                            RESEND VERIFICATION TOKEN
                         </Button>
                     </View>
                 </FormWrapper>

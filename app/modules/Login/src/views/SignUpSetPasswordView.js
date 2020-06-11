@@ -25,7 +25,7 @@ export default function SignUpSetPasswordView({ navigation }) {
     const [showPassword, setShowPassword] = useState(false);
 
     const setUserPassword = () =>
-        dispatch(loginActions.setPassword(password.value));
+        dispatch(loginActions.setPassword(password.value, navigation));
 
     return (
         <View style={styles.container}>
