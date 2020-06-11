@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import validateValue from '../utils/textValidators';
 import { COMMON } from '../const/InputTypes';
+import _ from 'lodash';
 
 export default function useFormInput(
     initialType = COMMON,
@@ -13,31 +14,34 @@ export default function useFormInput(
     const [showError, setShowError] = useState(false);
     const [disableSubmit, setDisableSubmit] = useState(true);
 
-    const onChangeText = text => {
-        console.log(text);
-        text = trim && text ? text.trim() : text;
-        if (!validateValue(text, type)) {
+    const setErrorStatus = (isDisableSubmit, isShowError, errorTextValue) => {
+        setDisableSubmit(isDisableSubmit);
+        setErrorText(errorTextValue);
+        setShowError(isShowError);
+    };
+
+    const onModifyValue = (newValue, reset = false) => {
+        console.log(newValue);
+        newValue = trim ? _.trim(newValue) : newValue;
+        if (!_.isString(newValue)) {
+            setErrorStatus(true, true, `Invalid input ${typeof newValue}`);
             setDisableSubmit(true);
-            setErrorText('invalid ' + type);
-            setShowError(true);
+        } else if (newValue.length === 0) {
+            setErrorStatus(true, false, '');
+        } else if (!validateValue(newValue, type)) {
+            setErrorStatus(true, true, `Please enter a valid ${type}.`);
         } else {
-            setDisableSubmit(false);
-            setErrorText('');
-            setShowError(false);
+            setErrorStatus(false, false, '');
         }
-        setValue(text);
+        if (reset) setValue(newValue);
+    };
+
+    const onChangeText = text => {
+        onModifyValue(text, true);
     };
 
     const onFocus = () => {
-        if (!validateValue(value, type)) {
-            setDisableSubmit(true);
-            setErrorText('invalid ' + type);
-            setShowError(true);
-        } else {
-            setDisableSubmit(false);
-            setErrorText('');
-            setShowError(false);
-        }
+        onModifyValue(value, false);
     };
 
     // useEffect(() => {}, [value]);

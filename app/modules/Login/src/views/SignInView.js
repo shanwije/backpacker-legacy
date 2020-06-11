@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-    View
-} from 'react-native';
+import { View } from 'react-native';
 import { Text, Button, Divider } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import * as loginActions from '../Actions';
