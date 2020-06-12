@@ -1,21 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Text, Button, Divider } from 'react-native-paper';
-import { useDispatch, useSelector } from 'react-redux';
+import { Text, Button, Divider, useTheme } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
 import * as loginActions from '../Actions';
 import TextBox from '../../../../global/components/TextBox';
 import FormWrapper from '../../../../global/components/FormWrapper';
 
 import styles from './styles';
-import { LOGIN_REDUCER } from '../../../../global/dataStore/reducers/reducerTypes';
-import AppTitle from '../../../../global/components/AppTitle';
 import useFormInput from '../../../../global/customHooks/useFormInput';
 import inputTypes from '../../../../global/const/InputTypes';
 import { loginScreens } from '../../../../global/navigation/screens';
 import LoginHeaderText from '../../../../global/components/LoginHeaderText';
 
 export default function SignInView({ navigation }) {
-    const id = useSelector(state => state[LOGIN_REDUCER].id);
+    const theme = useTheme();
     const dispatch = useDispatch();
     const [email, disableSubmitByEmail, setEmail] = useFormInput(
         inputTypes.EMAIL,
@@ -38,7 +36,8 @@ export default function SignInView({ navigation }) {
         <View style={styles.container}>
             <LoginHeaderText
                 headerText="Sign In"
-                subHeaderText="Please enter your email and password"
+                subHeaderText="Please enter your email address and password"
+                theme={theme}
             />
             <View style={styles.topInnerContainer}>
                 <FormWrapper>
@@ -115,7 +114,7 @@ export default function SignInView({ navigation }) {
                                     loginScreens.SIGN_UP_SCREEN_EMAIL,
                                 )
                             }>
-                            Sign Up
+                            SIGN UP
                         </Button>
                     </View>
                 </FormWrapper>

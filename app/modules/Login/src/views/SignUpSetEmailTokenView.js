@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, ImageBackground } from 'react-native';
-import { Text, Button } from 'react-native-paper';
+import { Text, Button, useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import * as loginActions from '../Actions';
 import FormWrapper from '../../../../global/components/FormWrapper';
@@ -15,7 +15,7 @@ import {
 import { BackHandler } from 'react-native';
 
 export default function SignUpSetEmailTokenView({ navigation }) {
-    //set token
+    const theme = useTheme();
     const email = useSelector(state => state[LOGIN_REDUCER].email);
     const dispatch = useDispatch();
     const submitAuthToken = tokenInput =>
@@ -29,25 +29,23 @@ export default function SignUpSetEmailTokenView({ navigation }) {
             <LoginHeaderText
                 headerText="We sent you a code"
                 subHeaderText={`Enter it below to verify ${email}`}
+                theme={theme}
             />
             <View style={styles.topInnerContainer}>
                 <FormWrapper>
                     <OTPInputView
-                        style={{ height: 80, marginBottom: 100 }}
-                        codeInputFieldStyle={{
-                            borderWidth: 0,
-                            borderBottomWidth: 3,
-                            color: '#000',
-                            fontSize: 25,
+                        style={styles.OTPInputView}
+                        codeInputFieldStyle={styles.otpInputField}
+                        codeInputHighlightStyle={{
+                            borderColor: theme.colors.surface,
                         }}
-                        codeInputHighlightStyle={{ borderColor: '#001ba0' }}
                         autoFocusOnLoad
                         pinCount={5}
                         onCodeFilled={code => {
                             submitAuthToken(code);
                         }}
                         placeholderCharacter={'0'}
-                        placeholderTextColor={'rgba(0, 0, 0, 0.3)'}
+                        placeholderTextColor={theme.colors.placeholder}
                     />
                     <View style={styles.signUpView}>
                         <Text>Any problem? </Text>

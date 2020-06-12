@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, ImageBackground } from 'react-native';
-import { Text, Button } from 'react-native-paper';
+import { Text, Button, useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import * as loginActions from '../Actions';
 import TextBox from '../../../../global/components/TextBox';
@@ -15,6 +15,7 @@ import { loginScreens } from '../../../../global/navigation/screens';
 import LoginHeaderText from '../../../../global/components/LoginHeaderText';
 
 export default function SignUpSetPasswordView({ navigation }) {
+    const theme = useTheme();
     const initialPassword = useSelector(state => state[LOGIN_REDUCER].password);
     console.log('initialEmail', initialPassword);
     const dispatch = useDispatch();
@@ -32,6 +33,7 @@ export default function SignUpSetPasswordView({ navigation }) {
             <LoginHeaderText
                 headerText="Password"
                 subHeaderText="Let's setup a password for you"
+                theme={theme}
             />
             <View style={styles.topInnerContainer}>
                 <FormWrapper>

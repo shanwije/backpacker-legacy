@@ -1,23 +1,31 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Text } from 'react-native-paper';
+import { Text, useTheme } from 'react-native-paper';
+import { RFValue } from 'react-native-responsive-fontsize';
 
-const loginHeaderText = props => (
-    <View
-        style={{
-            width: '100%',
-            padding: 20,
-            marginTop: 10,
-            marginBottom: 10,
-            height: '30%',
-        }}>
-        <Text style={{ fontSize: 35, textAlign: 'left' }}>
-            {props.headerText}
-        </Text>
-        <Text style={{ fontSize: 17, textAlign: 'left', marginTop: 10 }}>
-            {props.subHeaderText}
-        </Text>
-    </View>
-);
+const loginHeaderText = props => {
+    const { colors, fonts } = props.theme;
+    return (
+        <View
+            style={{
+                width: '100%',
+                padding: RFValue(20),
+                marginTop: RFValue(10),
+                marginBottom: RFValue(10),
+                height: '30%',
+            }}>
+            <Text style={{ textAlign: 'left', ...fonts.large }}>
+                {props.headerText}
+            </Text>
+            <Text
+                style={{
+                    textAlign: 'left',
+                    ...fonts.regular,
+                }}>
+                {props.subHeaderText}
+            </Text>
+        </View>
+    );
+};
 
 export default loginHeaderText;

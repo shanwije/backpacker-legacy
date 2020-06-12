@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, ImageBackground } from 'react-native';
-import { Text, Button } from 'react-native-paper';
+import { Text, Button, useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import * as loginActions from '../Actions';
 import TextBox from '../../../../global/components/TextBox';
@@ -16,6 +16,7 @@ import LoginHeaderText from '../../../../global/components/LoginHeaderText';
 
 // todo remove unnecessary padding to the sides
 export default function SignUpSetEmailView({ navigation }) {
+    const theme = useTheme();
     const dispatch = useDispatch();
     const [email, disableSubmitByEmail, setEmail] = useFormInput(
         inputTypes.EMAIL,
@@ -29,8 +30,9 @@ export default function SignUpSetEmailView({ navigation }) {
     return (
         <View style={styles.container}>
             <LoginHeaderText
-                headerText="Sign Up"
+                headerText="Let's register"
                 subHeaderText="Please enter your email address"
+                theme={theme}
             />
             <View style={styles.topInnerContainer}>
                 <FormWrapper>

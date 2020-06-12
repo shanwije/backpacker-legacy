@@ -1,4 +1,6 @@
 import { StyleSheet } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
+import themes from './../../../../global/utils/ThemeContext';
 
 const styles = StyleSheet.create({
     container: {
@@ -12,36 +14,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'column',
     },
-
-    // login: {
-    //   padding: 8,
-    // },
-    // formElement: {
-    //   fontSize: 20,
-    //   marginTop: 10,
-    //   marginBottom: 10,
-    //   // flex: 1
-    //   left: 20,
-    //   width: '100%',
-    // },
-    // backgroundImage: {
-    //     flex: 1,
-    //     resizeMode: 'cover',
-    //     justifyContent: 'center',
-    //     alignContent: 'center',
-    //     width: null,
-    //     height: null,
-    // },
-
-    // mainTitleText: {
-    //     color: '#fff',
-    //     fontSize: 30,
-    //     textAlign: 'center',
-    //     marginBottom: 30,
-    //     fontWeight: '500',
-    // },
     forgotPasswordView: {
-        marginTop: 10,
+        marginTop: RFValue(10),
+        marginBottom: RFValue(10),
         flexDirection: 'column',
     },
     signUpView: {
@@ -49,6 +24,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    OTPInputView: { height: RFValue(80), marginBottom: RFValue(100) },
+    otpInputField: {
+        borderWidth: 0,
+        borderBottomWidth: RFValue(3),
+        //todo update this value once dark, light mode update
+        color: themes.light.colors.text,
+        fontSize: RFValue(25),
     },
 });
 

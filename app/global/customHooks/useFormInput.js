@@ -44,7 +44,7 @@ export default function useFormInput(
         onModifyValue(value, false);
     };
 
-    // useEffect(() => {}, [value]);
+    useEffect(() => {}, [value]);
 
     const bind = {
         value,
