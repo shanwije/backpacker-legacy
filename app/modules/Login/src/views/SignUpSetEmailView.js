@@ -8,11 +8,11 @@ import FormWrapper from '../../../../global/components/FormWrapper';
 
 import styles from './styles';
 import { LOGIN_REDUCER } from '../../../../global/dataStore/reducers/reducerTypes';
-import AppTitle from '../../../../global/components/AppTitle';
 import useFormInput from '../../../../global/customHooks/useFormInput';
 import inputTypes from '../../../../global/const/InputTypes';
 import { loginScreens } from '../../../../global/navigation/screens';
 import LoginHeaderText from '../../../../global/components/LoginHeaderText';
+import PageWrapper from '../../../../global/components/PageWrapper';
 
 // todo remove unnecessary padding to the sides
 export default function SignUpSetEmailView({ navigation }) {
@@ -28,54 +28,58 @@ export default function SignUpSetEmailView({ navigation }) {
         dispatch(loginActions.setEmail(email.value, navigation));
 
     return (
-        <View style={styles.container}>
-            <LoginHeaderText
-                headerText="Let's register"
-                subHeaderText="Please enter your email address"
-                theme={theme}
-            />
-            <View style={styles.topInnerContainer}>
-                <FormWrapper>
-                    <TextBox
-                        label="Email"
-                        autoCompleteType="email"
-                        importantForAutofill="auto"
-                        keyboardType="email-address"
-                        textAlign="center"
-                        textContentType="emailAddress"
-                        blurOnSubmit={true}
-                        autoCorrect={true}
-                        autoFocus={true}
-                        {...email}
-                        returnKeyType={
-                            disableSubmitByEmail ? 'default' : 'send'
-                        }
-                        onSubmitEditing={() =>
-                            disableSubmitByEmail ? '' : setEmailAddress()
-                        }
-                    />
-                    <Button
-                        icon="login"
-                        mode="contained"
-                        type="submit"
-                        value="Submit"
-                        disabled={disableSubmitByEmail}
-                        onPress={() => setEmailAddress()}>
-                        NEXT
-                    </Button>
-                    <View style={styles.signUpView}>
-                        <Text>Already have a Backpacker account? </Text>
+        <PageWrapper type={0} theme={theme}>
+            <View style={styles.container}>
+                <LoginHeaderText
+                    headerText="Let's register"
+                    subHeaderText="Please enter your email address"
+                    theme={theme}
+                />
+                <View style={styles.topInnerContainer}>
+                    <FormWrapper>
+                        <TextBox
+                            label="Email"
+                            autoCompleteType="email"
+                            importantForAutofill="auto"
+                            keyboardType="email-address"
+                            textAlign="center"
+                            textContentType="emailAddress"
+                            blurOnSubmit={true}
+                            autoCorrect={true}
+                            autoFocus={true}
+                            {...email}
+                            returnKeyType={
+                                disableSubmitByEmail ? 'default' : 'send'
+                            }
+                            onSubmitEditing={() =>
+                                disableSubmitByEmail ? '' : setEmailAddress()
+                            }
+                        />
                         <Button
-                            mode="text"
-                            compact={true}
-                            onPress={() =>
-                                navigation.navigate(loginScreens.SIGN_IN_SCREEN)
-                            }>
-                            Sign IN
+                            icon="login"
+                            mode="contained"
+                            type="submit"
+                            value="Submit"
+                            disabled={disableSubmitByEmail}
+                            onPress={() => setEmailAddress()}>
+                            NEXT
                         </Button>
-                    </View>
-                </FormWrapper>
+                        <View style={styles.signUpView}>
+                            <Text>Already have a Backpacker account? </Text>
+                            <Button
+                                mode="text"
+                                compact={true}
+                                onPress={() =>
+                                    navigation.navigate(
+                                        loginScreens.SIGN_IN_SCREEN,
+                                    )
+                                }>
+                                Sign IN
+                            </Button>
+                        </View>
+                    </FormWrapper>
+                </View>
             </View>
-        </View>
+        </PageWrapper>
     );
 }

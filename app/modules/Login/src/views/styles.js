@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     },
     forgotPasswordView: {
         marginTop: RFValue(10),
-        marginBottom: RFValue(10),
         flexDirection: 'column',
     },
     signUpView: {
@@ -29,9 +28,15 @@ const styles = StyleSheet.create({
     otpInputField: {
         borderWidth: 0,
         borderBottomWidth: RFValue(3),
-        //todo update this value once dark, light mode update
-        color: themes.light.colors.text,
         fontSize: RFValue(25),
+    },
+    backgroundImage: {
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+        alignContent: 'center',
+        width: null,
+        height: null,
     },
 });
 
