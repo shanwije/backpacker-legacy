@@ -38,7 +38,7 @@ export default function SignUpSetEmailTokenView({ navigation }) {
                         <OTPInputView
                             style={styles.OTPInputView}
                             codeInputFieldStyle={{
-                                color: themes.light.colors.text,
+                                color: theme.colors.text,
                                 ...styles.otpInputField,
                             }}
                             codeInputHighlightStyle={{

@@ -46,7 +46,7 @@ export default function SignUpSetEmailView({ navigation }) {
                             textContentType="emailAddress"
                             blurOnSubmit={true}
                             autoCorrect={true}
-                            autoFocus={true}
+                            // autoFocus={false}
                             {...email}
                             returnKeyType={
                                 disableSubmitByEmail ? 'default' : 'send'

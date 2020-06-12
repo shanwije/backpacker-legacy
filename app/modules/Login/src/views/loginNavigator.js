@@ -10,11 +10,9 @@ import signUpEmail from './SignUpSetEmailView';
 import signUpEmailToken from './SignUpSetEmailTokenView';
 import signIn from './SignInView';
 import signUpPassword from './SignUpSetPasswordView';
-import { LOGIN_REDUCER } from '../../../../global/dataStore/reducers/reducerTypes';
 import { loginScreens } from '../../../../global/navigation/screens';
 import AppTitle from './../../../../global/components/AppTitle';
 import { useTheme } from 'react-native-paper';
-import { color } from 'react-native-reanimated';
 
 const Stack = createStackNavigator();
 
@@ -38,9 +36,8 @@ function LoginNavigator() {
                     title: 'Centered title',
                     headerShown: true,
                     headerTitleAlign: 'center',
-                    // ...TransitionPresets.SlideFromRightIOS,
+                    ...TransitionPresets.SlideFromRightIOS,
                 }}
-                // headerMode={false}
                 animation="fade">
                 <Stack.Screen
                     name={loginScreens.SIGN_IN_SCREEN}
