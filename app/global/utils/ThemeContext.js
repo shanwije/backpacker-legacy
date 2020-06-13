@@ -59,10 +59,10 @@ const themes = {
         colors: {
             primary: '#656cff',
             accent: '#003035',
-            background: '#121212',
+            background: '#000000',
             surface: '#001ba0',
             error: '#B00020',
-            card: '#121212',
+            card: '#000000',
             text: '#e5e5e7',
             border: '#272729',
             disabled: 'rgba(255, 255, 255,  0.26)',
