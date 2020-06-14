@@ -19,7 +19,10 @@ export default function MainView() {
     const authToken = useSelector(state => state[AUTH_REDUCER].authToken);
 
     const onSend = messages => {
-        socket.emit('message', messages[0].text);
+        socket.emit('message', {
+            messageText: messages[0].text,
+            token: authToken,
+        });
         setReceivedMsges(previousState =>
             GiftedChat.append(previousState, messages),
         );
