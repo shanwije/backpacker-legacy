@@ -18,8 +18,8 @@ const { persistor, store } = configureStore();
 export default function EntryPoint() {
     return (
         <Provider store={store}>
-            <PersistGate persistor={persistor}>
-                <AppearanceProvider>
+            <AppearanceProvider>
+                <PersistGate persistor={persistor}>
                     <PaperProvider
                         theme={
                             useColorScheme() === 'dark'
@@ -29,8 +29,8 @@ export default function EntryPoint() {
                         <Navigator />
                         <AppSnackBar />
                     </PaperProvider>
-                </AppearanceProvider>
-            </PersistGate>
+                </PersistGate>
+            </AppearanceProvider>
         </Provider>
     );
 }

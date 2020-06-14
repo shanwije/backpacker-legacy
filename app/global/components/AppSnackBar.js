@@ -9,9 +9,6 @@ const AppSnackBar = props => {
     const theme = useTheme();
     const message = useSelector(state => state[NOTIFICATION_REDUCER].message);
     const code = useSelector(state => state[NOTIFICATION_REDUCER].code);
-    console.log('snack bar message', message);
-    console.log('snack bar code', code);
-
     const notificationColor =
         _.toString(code).charAt(0) > 2 ? theme.colors.error : theme.colors.text;
 
