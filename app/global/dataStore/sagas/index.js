@@ -5,7 +5,7 @@ import {
     SET_EMAIL_AUTH_TOKEN,
     SET_PASSWORD,
 } from '../../../modules/Login/src/const/types';
-import { LOG_OUT } from '../../../modules/Home/src/types';
+import { LOG_OUT } from '../../../modules/Chat/src/types';
 import { SET_NOTIFICATION } from '../const/commonActionTypes';
 import {
     loginSaga,

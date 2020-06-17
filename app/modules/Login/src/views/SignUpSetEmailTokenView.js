@@ -17,7 +17,7 @@ import themes from '../../../../global/utils/ThemeContext';
 
 export default function SignUpSetEmailTokenView({ navigation }) {
     const theme = useTheme();
-    const email = useSelector(state => state[LOGIN_REDUCER].email);
+
     const dispatch = useDispatch();
     const submitAuthToken = tokenInput =>
         dispatch(loginActions.setEmailAuthToken(tokenInput, navigation));

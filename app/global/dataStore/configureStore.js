@@ -8,7 +8,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 import CryptoJS from 'crypto-js';
 import { createLogger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
-import { LOGIN_REDUCER, LOADING_REDUCER } from './reducers/reducerTypes';
+import {
+    LOGIN_REDUCER,
+    LOADING_REDUCER,
+    WEB_SOCKET_REDUCER,
+} from './reducers/reducerTypes';
 import combinedReducers from './reducers/combinedReducers';
 import rootSaga from './sagas';
 import config from './../../config';
@@ -38,7 +42,7 @@ const encrypt = createTransform(
 const storeConfig = {
     key: 'root',
     storage: AsyncStorage,
-    blacklist: [LOGIN_REDUCER, LOADING_REDUCER],
+    blacklist: [LOGIN_REDUCER, LOADING_REDUCER, WEB_SOCKET_REDUCER],
     debug: true, //to get useful logging
 };
 

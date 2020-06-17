@@ -1,6 +1,9 @@
 import createReducer from './createReducer';
 import _ from 'lodash';
 import { SET_SIGN_IN, SET_SIGN_OUT } from './../const/commonActionTypes';
+import configureStore from '../configureStore';
+import io from 'socket.io-client';
+import config from '../../../config';
 
 const initialState = {
     isLoggedIn: false,
