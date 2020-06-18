@@ -2,7 +2,7 @@ import loginReducer from '../../../modules/Login/src/Reducer';
 import loadingReducer from './loadingReducer';
 import notificationReducer from './notificationReducer';
 import authReducer from './authReducer';
-import webSocketReducer from '../../../modules/Chat/src/webSocketReducer';
+import webSocketReducer from '../../webSocket/webSocketReducer';
 
 import {
     LOGIN_REDUCER,

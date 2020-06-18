@@ -26,28 +26,6 @@ const loginReducer = createReducer(initialState, {
             password: _.get(action, 'payload.password', ''),
         };
     },
-    [LOGIN_LOADING_ENDED](state) {
-        return { ...state };
-    },
-    [LOGIN_RESPONSE](state, action) {
-        return {
-            ...state,
-            id: _.get(action, 'payload.id', ''),
-            isLoggedIn: true,
-        };
-    },
-    [LOGIN_FAILED](state) {
-        return {
-            ...state,
-            isLoggedIn: false,
-        };
-    },
-    [LOG_OUT](state) {
-        return {
-            ...state,
-            isLoggedIn: false,
-        };
-    },
 });
 
 export default loginReducer;

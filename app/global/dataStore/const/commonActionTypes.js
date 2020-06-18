@@ -9,3 +9,8 @@ export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
 //auth
 export const SET_SIGN_IN = 'SET_SIGN_IN';
 export const SET_SIGN_OUT = 'SET_SIGN_OUT';
+
+//web socket
+export const SET_WEB_SOCKET = 'SET_WEB_SOCKET';
+export const FORCE_DISCONNECT_WEB_SOCKET = 'FORCE_DISCONNECT_WEB_SOCKET';
+export const CLEAR_WEB_SOCKET = 'CLEAR_WEB_SOCKET';

@@ -1,4 +1,4 @@
-import { put, call } from 'redux-saga/effects';
+import { put, call, delay } from 'redux-saga/effects';
 import * as loginActions from './Actions';
 import * as notificationActions from '../../../global/dataStore/actions/notificationActions';
 import * as authActions from './../../../global/dataStore/actions/authActions';
@@ -10,9 +10,9 @@ import {
     setPasswordWithBearer,
 } from './Repository';
 import { loginScreens } from '../../../global/navigation/screens';
-import { getHttpErrorMsg } from '../../../global/utils/utils';
 import { select } from 'redux-saga/effects';
 import * as reducerTypes from '../../../global/dataStore/reducers/reducerTypes';
+import * as webSocketActions from '../../../global/webSocket/webSocketActions';
 
 export function* loginSaga(action) {
     yield put(loginActions.enableLoader());
@@ -22,6 +22,8 @@ export function* loginSaga(action) {
     try {
         const response = yield call(() => authenticate(email, password));
         if (response.success) {
+            // setup socket connection once after user logged in
+            yield put(webSocketActions.setWebSocket(response.token));
             yield put(authActions.setSignIn(response.token));
             yield put(loginActions.disableLoader({}));
         } else {
@@ -43,28 +45,33 @@ export function* loginSaga(action) {
 }
 
 export function* logoutSaga(action) {
-    //todo to logout from all device use this payload
-    // const payload = _.get(action, 'payload');
-    //
-    // yield put(loginActions.enableLoader());
-    // try {
-    //   let response = yield call(() => logout(payload));
-    //   if (response.success) {
-    //     yield put(loginActions.disableLoader({}));
-    //     //todo put a success snackbar
-    //   } else {
-    //     yield put(notificationActions.setNotification(_.get(response, 'error', 'error')));
-    //     yield put(loginActions.disableLoader({}));
-    //   }
-    // } catch (err) {
-    //   yield put(
-    //     notificationActions.setNotification(
-    //       `Oops, Unexpected error has occurred\n${_.get(err, 'message')}`,
-    //     ),
-    //   );
-    //   yield put(loginActions.disableLoader({}));
-    // }
-    yield put(authActions.setSignOut());
+    try {
+        //todo to logout from all device use this payload
+        // const payload = _.get(action, 'payload');
+        //
+        // yield put(loginActions.enableLoader());
+        // try {
+        //   let response = yield call(() => logout(payload));
+        //   if (response.success) {
+        //     yield put(loginActions.disableLoader({}));
+        //     //todo put a success snackbar
+        //   } else {
+        //     yield put(notificationActions.setNotification(_.get(response, 'error', 'error')));
+        //     yield put(loginActions.disableLoader({}));
+        //   }
+        // } catch (err) {
+        //   yield put(
+        //     notificationActions.setNotification(
+        //       `Oops, Unexpected error has occurred\n${_.get(err, 'message')}`,
+        //     ),
+        //   );
+        //   yield put(loginActions.disableLoader({}));
+        // }
+        yield put(webSocketActions.forceDisconnectWebSocket());
+        yield put(authActions.setSignOut());
+    } catch (err) {
+        yield put(notificationActions.setNotification(err));
+    }
 }
 
 export function* setEmailSaga(action) {
@@ -161,6 +168,10 @@ export function* setPasswordSaga(action) {
             // login successful and jwt received
             yield put(loginActions.disableLoader({}));
             yield put(loginActions.clearSignupData());
+
+            // setup socket connection once after user logged in
+            yield put(webSocketActions.setWebSocket(response.token));
+
             yield put(authActions.setSignIn(response.token));
             yield put(loginActions.disableLoader({}));
 

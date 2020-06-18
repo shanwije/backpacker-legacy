@@ -9,7 +9,7 @@ import {
     LOGIN_DISABLE_LOADER,
     LOG_OUT,
 } from './types';
-import createAction from '../../../../global/dataStore/actions/createAction';
+import createAction from '../../../global/dataStore/actions/createAction';
 
 export const requestLogin = (username, password) =>
     createAction({

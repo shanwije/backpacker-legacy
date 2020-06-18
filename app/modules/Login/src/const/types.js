@@ -11,3 +11,5 @@ export const SET_PASSWORD = 'SET_PASSWORD';
 export const SET_EMAIL_AUTH_TOKEN = 'SET_EMAIL_AUTH_TOKEN';
 export const SET_PASSWORD_BEARER = 'SET_PASSWORD_BEARER';
 export const CLEAR_SIGN_UP_DATA = 'CLEAR_SIGN_UP_DATA';
+// this action comes from redux persist ( in built one )
+export const PERSIST_REHYDRATE = 'persist/REHYDRATE';
