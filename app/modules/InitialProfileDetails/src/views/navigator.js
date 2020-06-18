@@ -1,0 +1,63 @@
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import {
+    createStackNavigator,
+    TransitionPresets,
+    CardStyleInterpolators,
+} from '@react-navigation/stack';
+import { useSelector } from 'react-redux';
+import signUpEmail from './SignUpSetEmailView';
+import signUpEmailToken from './SignUpSetEmailTokenView';
+import getUserName from './GetUserNameView';
+import signUpPassword from './SignUpSetPasswordView';
+import { loginScreens } from '../../../../global/navigation/screens';
+import AppTitle from './../../../../global/components/AppTitle';
+import { useTheme } from 'react-native-paper';
+
+const Stack = createStackNavigator();
+
+function Navigator() {
+    const theme = useTheme();
+
+    return (
+        <NavigationContainer independent={true} theme={theme}>
+            <Stack.Navigator
+                screenOptions={{
+                    gestureEnabled: true,
+                    gestureDirection: 'horizontal',
+                    headerStyle: {
+                        borderTopWidth: 0,
+                        elevation: 0,
+                        shadowOpacity: 0,
+                    },
+                    headerTitle: props => (
+                        <AppTitle dark={theme.dark} {...props} />
+                    ),
+                    title: 'Centered title',
+                    headerShown: true,
+                    headerTitleAlign: 'center',
+                    ...TransitionPresets.SlideFromRightIOS,
+                }}
+                animation="fade">
+                <Stack.Screen
+                    name={loginScreens.SIGN_IN_SCREEN}
+                    component={getUserName}
+                />
+                <Stack.Screen
+                    name={loginScreens.SIGN_UP_SCREEN_EMAIL}
+                    component={signUpEmail}
+                />
+                <Stack.Screen
+                    name={loginScreens.SIGN_UP_SCREEN_EMAIL_TOKEN}
+                    component={signUpEmailToken}
+                />
+                <Stack.Screen
+                    name={loginScreens.SIGN_UP_SCREEN_PASSWORD}
+                    component={signUpPassword}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+}
+
+export default Navigator;
